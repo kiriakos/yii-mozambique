@@ -1,4 +1,6 @@
 <?php
+namespace gr\kindstudios\widget\mozambique\interfaces;
+
 /**
  * Sort of a DAO for EKindMozambique
  *

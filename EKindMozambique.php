@@ -1,4 +1,6 @@
 <?php
+namespace gr\kindstudios\widget\mozambique;
+
 /**
  * Layouting widget that allows content to be aranged in interesting tiles.
  *

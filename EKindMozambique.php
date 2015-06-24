@@ -1,103 +1,105 @@
 <?php
-namespace gr\kindstudios\widget\mozambique;
 
 /**
- * Layouting widget that allows content to be aranged in interesting tiles.
+ * Appliction Component EKindMozambique
  *
  * @author kiriakos
  */
-class EKindMozambique extends CWidget{
+final class EKindMozambique extends CApplicationComponent {
+    
+    public $finderAlias;
+    public $widgetAlias = "ext.kindMozambique.components.EKindMozambiqueWidget";
+    public $designerAlias = "ext.kindMozambique.components.EKindMozambiqueGridDesigner";
+    public $gridAlias = "ext.kindMozambique.components.EKindMozambiqueGrid";
+    public $defaultGridHeight = 6;
+    public $defaultGridWidth = 5;
     
     /**
-     * Map of Types to timestamps
      *
-     * @var array
+     * @var IMozambiqueFinder
      */
-    private $timestamps = false;
+    private $finder;
     
-    /**
-     * The HTML id attribute of the produced markup
-     * @var string
-     */
-    private $htmlId = null;
-
-    /**
-     * Grid Items to use
-     * @var type 
-     */
-    public $items = false;
-
-    /**
-     * Initializes all attributes
-     */
-    public function init(){
-        
-        $this->htmlId =$this->id.'_KindGrid_TimeStamp';
-        $this->collectRequestPatrams();
-
-        
-        $this->designer = new KindFrontPageDesigner($this->items);
-        
-        //$this->designer->populate($this->timestamp);
-        //$this->designer->order();
-        //$this->designer->layout();
-    }
-
-    /**
-     * Renders a Grid
-     */
-    public function run(){
-        
-        $this->designer->render();
-        $this->renderNav();
-        $this->renderInfiniScroll();
-    }
     
-    /**
-     * Find init parameters in the request
-     */
-    private function collectRequestPatrams(){
+    public function init() {
+        parent::init();
         
-        if(isset($_GET[$this->htmlId]) && is_numeric($_GET[$this->htmlId])){
-            $this->timestamps = $_GET[$this->htmlId];
+        Yii::import("ext.kindMozambique.interfaces.*");
+        Yii::import("ext.kindMozambique.components.*");
+        Yii::import("ext.kindMozambique.exceptions.*");
+        
+        Yii::import($this->finderAlias);
+        $class = array_pop(explode(".", $this->finderAlias));
+        
+        $this->finder = new $class;
+        
+        if(! $this->finder instanceof \IMozambiqueFinder){
+            throw new \CException("Mozambique requires the configuration"
+                    . " property finderClass to point to an implementation of"
+                    . " IItemFinder!");
         }
     }
     
     /**
-     * Render procedure to echo the html of the nav unit
+     * 
+     * @return interfaces\IItemFinder
      */
-    private function renderNav()
-    {
-        echo '<hr class="hidden" />';
-        echo '<div class="tiles navigation centered"><div>';
-        echo CHtml::link(
-                Yii::t( 'phrases', 'older items'),
-                array('', $this->htmlId=>$this->designer->getOldestTimestamp()),
-                array('class'=>'button navigation next')
-        );
-        echo '</div></div>';
-
+    public function getFinder(){
+        return $this->finder;
     }
-
-    private function renderInfiniScroll()
-    {
-        $pages = new CPagination(10);
-        $pages->pageSize= 3;
-
-        $this->widget('ext.yiinfinite-scroll.YiinfiniteScroller', array(
-            'itemSelector' => '#main div.tiles',
-            'contentSelector' => '#main',
-            'loading'=>array(  //infiscroll 2.0.xxx
-               'finishedMsg'=> '', //"Συγχαρητήρια, φτάσατε στο τέλος της λίστας",
-               'img'=> '/images/system/loading.gif',
-               'msg'=> null,
-               'msgText'=> '', //"<em>φορτώνονται δεδομένα...</em>",
-            ),
-            'navSelector'=>'div.tiles.navigation.centered',
-            'nextSelector'=>'div.tiles.navigation.centered a.next',
-
-            'pages' => $pages,
-        ));
+    
+    public function getWidgetAlias(){
+        return $this->widgetAlias;
     }
-
+    
+    /**
+     * 
+     * @param array $timestampMap
+     * @return string
+     */
+    public function renderWidget($timestampMap = null){
+        
+        return Yii::app()->controller->widget($this->getWidgetAlias(),array(
+            'timestampMap' => $timestampMap
+        ), TRUE);
+    }
+    
+    /**
+     * 
+     * @param IMozambiqueTile[] $tiles
+     * @return string
+     */
+    public function renderWidgetWithItems($tiles){
+        
+        return Yii::app()->controller->widget($this->getWidgetAlias(),array(
+            'tiles' => $tiles
+        ), TRUE);
+    }
+    
+    /**
+     * Produces an empty grid preconfigured for the given dimensions.
+     * 
+     * The type of grid produced can be manipulated via the gridAlias property
+     * 
+     * @param int $width
+     * @param int $height
+     * @return IGrid
+     */
+    public function generateGrid($width = NULL,$height = NULL){
+        if($width === NULL){
+            $width = $this->defaultGridWidth;
+        }
+        if($height === NULL){
+            $height = $this->defaultGridHeight;
+        }
+        
+        $grid = Yii::createComponent($this->gridAlias);
+        
+        
+        return $grid;
+    }
+    
+    public function generateDesigner(){
+        return Yii::createComponent($this->designerAlias);
+    }
 }

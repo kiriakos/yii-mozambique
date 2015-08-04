@@ -7,7 +7,7 @@
  * @author kiriakos
  */
 class EKindMozambiqueActiveRecordTile 
-extends EKindMozambiqueSimpleTile 
+extends EKindMozambiqueAbstractTile 
 implements IMozambiqueTile {
     
     /**

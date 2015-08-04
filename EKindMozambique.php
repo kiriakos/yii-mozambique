@@ -36,7 +36,7 @@ final class EKindMozambique extends CApplicationComponent {
         if(! $this->finder instanceof \IMozambiqueFinder){
             throw new \CException("Mozambique requires the configuration"
                     . " property finderClass to point to an implementation of"
-                    . " IItemFinder!");
+                    . " IMozambiqueFinder!");
         }
     }
     

@@ -80,4 +80,19 @@ interface IMozambiqueTile {
     
     public function getHeight();
     public function getWidth();
+    
+    /**
+     * Return the Left Top corner of the tile's position on the grid
+     * 
+     * @returns \EKindMozambiquePoint
+     */
+    public function getGridPosition();
+
+    /**
+     * Set the grid position of the tile's Left Top corner
+     * 
+     * @param \EKindMozambiquePoint $position
+     */
+    public function setGridPosition(\EKindMozambiquePoint $position);
+       
 }

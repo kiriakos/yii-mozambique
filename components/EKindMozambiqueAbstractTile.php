@@ -13,7 +13,8 @@
  *  
  * @author kiriakos
  */
-abstract class EKindMozambiqueSimpleTile implements IMozambiqueTile{
+abstract class EKindMozambiqueAbstractTile
+implements IMozambiqueTile{
     
     public function __construct($width = 1, $height = 1) {
         $this->width = $width;
@@ -31,6 +32,12 @@ abstract class EKindMozambiqueSimpleTile implements IMozambiqueTile{
      * @var integer
      */
     private $width;
+    
+    /**
+     *  The position of the tile's Left Top corner
+     * @var \EKindMozambiquePoint
+     */
+    private $gridPosition;
     
     
     public function canHeighten() {
@@ -85,5 +92,23 @@ abstract class EKindMozambiqueSimpleTile implements IMozambiqueTile{
                     . " reduced to 0!";
             throw new EKindMozambiqueSizeOutOfBoundsException($msg);
         }      
+    }
+    
+    /**
+     * Return the Left Top corner of the tile's position on the grid
+     * 
+     * @returns array or bool FALSE if the item isn't positioned on the grid
+     */
+    public function getGridPosition() {
+        return $this->gridPosition;
+    }
+
+    /**
+     * Set the grid position of the tile's Left Top corner
+     *
+     * @param \EKindMozambiquePoint $position
+     */
+    public function setGridPosition(\EKindMozambiquePoint $position) {
+        $this->gridPosition = $position;
     }
 }

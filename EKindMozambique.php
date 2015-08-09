@@ -11,6 +11,7 @@ final class EKindMozambique extends CApplicationComponent {
     public $widgetAlias = "ext.kindMozambique.components.EKindMozambiqueWidget";
     public $designerAlias = "ext.kindMozambique.components.EKindMozambiqueGridDesigner";
     public $gridAlias = "ext.kindMozambique.components.EKindMozambiqueGrid";
+    public $gapPatcherAlias = "ext.kindMozambique.components.EKindMozambiqueGapPatcher";
     public $defaultGridHeight = 6;
     public $defaultGridWidth = 5;
     
@@ -77,7 +78,7 @@ final class EKindMozambique extends CApplicationComponent {
     }
     
     /**
-     * Produces an empty grid preconfigured for the given dimensions.
+     * Generates an empty grid preconfigured for the given dimensions.
      * 
      * The type of grid produced can be manipulated via the gridAlias property
      * 
@@ -99,7 +100,21 @@ final class EKindMozambique extends CApplicationComponent {
         return $grid;
     }
     
+    /**
+     * Generates a Grid Designer from the passed configuration
+     * 
+     * @return IMozambiqueGridDesigner
+     */
     public function generateDesigner(){
         return Yii::createComponent($this->designerAlias);
+    }
+    
+    /**
+     * Generates a Gap Patcher from the passed configuration
+     * 
+     * @return IMozambiqueGapPatcher
+     */
+    public function generateGapPatcher(){
+        return Yii::createComponent($this->gapPatcherAlias);
     }
 }

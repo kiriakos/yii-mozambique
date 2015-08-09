@@ -108,7 +108,7 @@ implements IMozambiqueGrid{
         for ($y = 0; $y < $this->getHeight(); $y++) {
             for ($x = 0; $x < $this->getWidth(); $x++) {
                 $point = new EKindMozambiquePoint($x, $y);
-                $tile = $this->getItem($point);
+                $tile = $this->getTile($point);
                 
                 if($tile === FALSE){
                     $gaps[] = $point;
@@ -125,10 +125,10 @@ implements IMozambiqueGrid{
      * 
      * Zero based coordinates.
      * 
-     * @param \EKindMozambiquePoint $point
+     * @param \IMozambiquePoint $point
      * @return \IMozambiqueTile
      */
-    public function getTile(\EKindMozambiquePoint $point) {
+    public function getTile(\IMozambiquePoint $point) {
         
         $x = $point->getX();
         $y = $point->getY();

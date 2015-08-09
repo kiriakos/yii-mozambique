@@ -25,5 +25,5 @@ extends EKindMozambiquePoint{
      */
     public function getGrid(){ return $this->grid; }
     
-    public function getTile(){ return $this->grid->getItem($this); }
+    public function getTile(){ return $this->grid->getTile($this); }
 }

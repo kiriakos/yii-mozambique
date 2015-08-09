@@ -84,14 +84,14 @@ interface IMozambiqueTile {
     /**
      * Return the Left Top corner of the tile's position on the grid
      * 
-     * @returns \EKindMozambiquePoint
+     * @returns \IMozambiquePoint
      */
     public function getGridPosition();
 
     /**
      * Set the grid position of the tile's Left Top corner
      * 
-     * @param \EKindMozambiquePoint $position
+     * @param \IMozambiquePoint $position
      */
     public function setGridPosition(\EKindMozambiquePoint $position);
        

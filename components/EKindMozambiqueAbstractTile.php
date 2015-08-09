@@ -35,7 +35,7 @@ implements IMozambiqueTile{
     
     /**
      *  The position of the tile's Left Top corner
-     * @var \EKindMozambiquePoint
+     * @var \IMozambiquePoint
      */
     private $gridPosition;
     
@@ -106,9 +106,9 @@ implements IMozambiqueTile{
     /**
      * Set the grid position of the tile's Left Top corner
      *
-     * @param \EKindMozambiquePoint $position
+     * @param \IMozambiquePoint $position
      */
-    public function setGridPosition(\EKindMozambiquePoint $position) {
+    public function setGridPosition(\IMozambiquePoint $position) {
         $this->gridPosition = $position;
     }
 }

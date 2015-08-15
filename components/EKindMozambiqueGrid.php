@@ -1,6 +1,9 @@
 <?php
 /**
- * Description of EKindMozambiqueGrid
+ * Base implementation of a grid
+ * 
+ * Tries to encapsulate as much as possible. Does not allow for manual adding 
+ * or removing of tiles, provides the indirect addTile and removeTile methods.
  *
  * @author kiriakos
  */
@@ -8,6 +11,21 @@ class EKindMozambiqueGrid
 extends EKindMozambiqueAbstractTile 
 implements IMozambiqueGrid{
     
+    private $grid;
+    
+    public function __construct($width = 1, $height = 1) {
+        
+        parent::__construct($width, $height);
+        
+        $row = array_fill(0, $width, NULL);
+        $grid = array_fill(0, $height, NULL);
+        for($i = 0; $i < $height; $i++){
+            $grid[$i] = array_values($row);
+        }
+        
+        $this->grid = $grid;
+    }
+            
     public function getDesiredDimensions() {
         
     }
@@ -22,81 +40,8 @@ implements IMozambiqueGrid{
 
     public function render($return = TRUE) {
         
-    }
+    }    
     
-    private function callcualteHypoDims(\IMozambiqueTile $tile){
-        
-        $hypoDims = array();
-        $dim = $tile->getDimensions();
-                
-        if ($tile->canHeighten()){
-            $hypoDims[] = array($dim[0],$dim[1]+1);
-        }
-        
-        if ($tile->canWiden()){
-            $hypoDims[] = array($dim[0]+1,$dim[1]);
-        }
-        
-        if ($tile->canUnHeighten()){
-            $hypoDims[] = array($dim[0],$dim[1]-1);
-        }
-        
-        if ($tile->canUnWiden()){
-            $hypoDims[] = array($dim[0]-1,$dim[1]);
-        }
-
-        return $hypoDims;
-    }
-    
-    
-    /**
-     * Tries to fill all gaps
-     */
-    public function fillGaps(){
-        
-        while ( ($gaps = $this->getGaps())) {
-            foreach ($gaps as $gap) {
-                $filled = $this->fillGap($gap);
-                
-                if(!$filled){
-                    $this->forceFillGap($gap);
-                }
-            }
-        }
-    }
-    
-    /**
-     * Tries to fill a gap without creating new ones
-     * 
-     * @param \EKindMozambiqueGap $gap
-     * @return boolean
-     */
-    private function fillGap (\EKindMozambiqueGap $gap) {
-        $tiles = $gap->getAdjoiningTiles($this);
-        
-        foreach ($tiles as $tile){
-            if($tile->expandTo($gap, $this)){
-                return TRUE;
-            }
-        }
-        
-        return FALSE;
-    }
-
-    /**
-     * Fills a gap possibly creating new ones
-     * 
-     * @param \EKindMozambiqueGap $gap
-     * @return boolean
-     */
-    private function forceFillGap (\EKindMozambiqueGap $gap) {
-        $tiles = $gap->getAdjoiningTiles($this);
-        shuffle($tiles);
-        
-        $tile = $tiles[0];
-        return $tile->forceExpandTo($gap, $this);
-    }
-
     /**
      * Gets the gaps that exist in the current layout
      * 
@@ -138,7 +83,7 @@ implements IMozambiqueGrid{
                     . " be non negative integers!");
         }
         elseif ($this->getWidth() > $x && $this->getHeight() > $y) {
-            return $this->grid[$point->getY()][$point->getX()];
+            return $this->grid[$y][$x];
         }
         else {
             throw new EKindMozambiqueSizeOutOfBoundsException("Grid Size"
@@ -146,7 +91,55 @@ implements IMozambiqueGrid{
                     . "requested, $x x $y");
         }
     }
-    
-    
 
+    public function addTile(\IMozambiqueTile $tile) {
+        
+        $counter = 10;
+        while(($added = $this->tryAdding($tile)) === FLASE && --$counter){
+            $tile->unWiden() || $tile->unHeighten() || $this->heighten();
+        }
+
+        return $added;
+    }
+    
+    /**
+     * Tries Adding a Tile to the grid.
+     * 
+     * Will return FALSE if any issues arise.
+     * 
+     * @return boolean
+     */
+    private function tryAdding(\IMozambiqueTile $tile){
+        $dims = $tile->getDimensions();
+        $position = $this->getSpace($dims);
+        
+        if ($position){
+            return $this->setItem($position, $tile);
+        }
+        
+        return FALSE;
+    }
+    
+    public function removeTile(\IMozambiqueTile $tile){
+        foreach($this->grid as $r=>$row){
+            foreach($row as $t=>$content){
+                if($content && $tile === $content){
+                    $this->
+                    $this->setTile(array($t,$r));
+                }
+            }
+        }
+    }
+
+    public function fillGaps() {
+        $gapPatcher = Yii::app()->mozambique->generateGapPatcher();
+        $gaps = $this->getGaps();
+        while($gaps){
+            if(!$gapPatcher->fillGap($gap, $this)){
+                $gapPatcher->forceFillGapp($gap, $this);
+            }
+            
+            $gaps = $this->getGaps();
+        }
+    }
 }

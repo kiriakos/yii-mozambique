@@ -12,13 +12,13 @@ implements IMozambiqueGridDesigner{
     
     /**
      *
-     * @var IGrid
+     * @var IMozambiqueGrid
      */
     private $grid;
     
     /**
      *
-     * @var ITile[]
+     * @var IMozambiqueTile[]
      */
     private $tiles;
     
@@ -47,10 +47,18 @@ implements IMozambiqueGridDesigner{
     }
 
     public function setTiles(CTypedList $tiles) {
-        $this->tiles = $tiles;
+        $this->tiles = $tiles->toArray();
     }
 
     public function order() {
+        $sorter = Yii::app()->mozambique->generateSorter();
+        usort($this->tiles, array($sorter,"sort"));
+        
         
     }
+
+    public function getPaginationCriterion() {
+        
+    }
+
 }

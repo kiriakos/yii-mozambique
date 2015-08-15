@@ -8,7 +8,8 @@
  * 
  * @author kiriakos
  */
-class EKindMozambiquePoint {
+class EKindMozambiquePoint 
+implements IMozambiquePoint{
     
     /**
      *
@@ -47,7 +48,7 @@ class EKindMozambiquePoint {
      * @param \IMozambiquePoint $point
      * @return boolean
      */
-    public final function sameX(\IMozambiquePoint $point){
+    public function sameX(\IMozambiquePoint $point){
         return $this->getX() == $point->getX();
     }
     
@@ -57,7 +58,7 @@ class EKindMozambiquePoint {
      * @param \IMozambiquePoint $point
      * @return type
      */
-    public final function sameY(\IMozambiquePoint $point){
+    public function sameY(\IMozambiquePoint $point){
         return $this->getY() == $point->getY();
     }
 }

@@ -93,6 +93,6 @@ interface IMozambiqueTile {
      * 
      * @param \IMozambiquePoint $position
      */
-    public function setGridPosition(\EKindMozambiquePoint $position);
+    public function setGridPosition(\IMozambiquePoint $position);
        
 }

@@ -21,8 +21,16 @@ class EKindMozambiqueWidget extends CWidget{
      */
     public $tiles = FALSE;
     
-    public $timestampMap = NULL;
+    /**
+     * Pagination information. This is collected from the Request by default.
+     * @var IMozambiquePagination
+     */
+    public $pagination = NULL;
 
+    /**
+     *
+     * @var IMozambiqueGridDesigner 
+     */
     private $designer = NULL;
     
     /**
@@ -33,12 +41,13 @@ class EKindMozambiqueWidget extends CWidget{
         $this->htmlId =$this->id.'_KindGrid_TimeStamp';
         $this->collectRequestPatrams();
 
-        if(!$this->timestampMap){
-            $this->timestampMap = $this->collectRequestPatrams();
+        if(!$this->pagination){
+            $this->pagination = $this->collectRequestPatrams();
         }
         
         if(!$this->tiles){
-            $this->tiles = Yii::app()->mozambique->getFinder()->findItems();
+            $this->tiles = Yii::app()->mozambique->getFinder()
+                    ->findItems($this->pagination);
         }
         
         $this->designer = Yii::app()->mozambique->generateDesigner();
@@ -48,18 +57,17 @@ class EKindMozambiqueWidget extends CWidget{
     }
 
     /**
-     * Renders a Grid
+     * Produces the Grid based on the configuration and outputs it.
      */
     public function run(){
         
-        $this->designer->render();
+        $this->designer->getGrid()->render(FALSE);
         $this->renderNav();
         $this->renderInfiniScroll();
     }
     
     /**
-     * Find init parameters in the request
-     *
+     * Finds init parameters in the request.
      */
     private function collectRequestPatrams(){
         
@@ -81,7 +89,7 @@ class EKindMozambiqueWidget extends CWidget{
         echo '<hr class="hidden" />';
         echo '<div class="tiles navigation centered"><div>';
         echo CHtml::link(
-                Yii::t( 'phrases', 'older items'),
+                Yii::t('phrases', 'older items'),
                 array('', $this->htmlId=>$this->designer->getOldestTimestamp()),
                 array('class'=>'button navigation next')
         );
@@ -97,11 +105,11 @@ class EKindMozambiqueWidget extends CWidget{
         $this->widget('ext.yiinfinite-scroll.YiinfiniteScroller', array(
             'itemSelector' => '#main div.tiles',
             'contentSelector' => '#main',
-            'loading'=>array(  //infiscroll 2.0.xxx
-               'finishedMsg'=> '', //"Συγχαρητήρια, φτάσατε στο τέλος της λίστας",
+            'loading'=>array(
+               'finishedMsg'=> 'No more items!',
                'img'=> '/images/system/loading.gif',
                'msg'=> null,
-               'msgText'=> '', //"<em>φορτώνονται δεδομένα...</em>",
+               'msgText'=> 'Loading...',
             ),
             'navSelector'=>'div.tiles.navigation.centered',
             'nextSelector'=>'div.tiles.navigation.centered a.next',
@@ -109,5 +117,4 @@ class EKindMozambiqueWidget extends CWidget{
             'pages' => $pages,
         ));
     }
-
 }

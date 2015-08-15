@@ -13,10 +13,12 @@ interface IMozambiquePoint {
     /**
      * Base constructor.
      * 
-     * This should be the only way to instantiate a basic point. 
+     * This is the standard way to instantiate a basic point. Implementors might
+     * Override this constuctor in favor of enforcing a more specialized one.
+     * Beware.
      * 
-     * @param type $x
-     * @param type $y
+     * @param integer $x The X Dimension
+     * @param integer $y The Y Dimension
      * @throws EKindMozambiqueDimensionOutOfBoundsException
      */
     public function __construct($x, $y);

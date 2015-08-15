@@ -8,10 +8,26 @@
 final class EKindMozambique extends CApplicationComponent {
     
     public $finderAlias;
+    
+    ////////////////////////////////////////////////////////////////////////////
+    // Components
+    //
+    // These can be configured via classical Yii Component configuration arrays
     public $widgetAlias = "ext.kindMozambique.components.EKindMozambiqueWidget";
     public $designerAlias = "ext.kindMozambique.components.EKindMozambiqueGridDesigner";
     public $gridAlias = "ext.kindMozambique.components.EKindMozambiqueGrid";
+    public $defaultSorter = "ext.kindMozambique.components.EKindMozambiquePropertyBasedSorter";
+    
+    ////////////////////////////////////////////////////////////////////////////
+    // Non Components
+    //
+    // These classes provide very specialized functionality and have speciffic 
+    // instantiation requirements. Chack the constructors on their interfaces 
+    // for more information
+    public $pointAlias = "ext.kindMozambique.components.EKindMozambiquePoint";
+    public $gapAlias = "ext.kindMozambique.components.EKindMozambiqueGap";
     public $gapPatcherAlias = "ext.kindMozambique.components.EKindMozambiqueGapPatcher";
+    
     public $defaultGridHeight = 6;
     public $defaultGridWidth = 5;
     
@@ -42,6 +58,19 @@ final class EKindMozambique extends CApplicationComponent {
     }
     
     /**
+     * Instantiate a non Yii/CComponent Class
+     * 
+     * @param string $alias
+     * @param array $args
+     */
+    private function instantiateNonComponent($alias, $args = array()){
+        Yii::import($alias);
+        $class = array_pop(explode(".", $alias));
+        $reflection = new ReflectionClass($class);
+        return $reflection->newInstanceArgs($args);
+    }
+    
+    /**
      * 
      * @return interfaces\IItemFinder
      */
@@ -55,13 +84,14 @@ final class EKindMozambique extends CApplicationComponent {
     
     /**
      * 
-     * @param array $timestampMap
+     * 
+     * @param IMozambiquePagination $pagination
      * @return string
      */
-    public function renderWidget($timestampMap = null){
+    public function renderWidget(IMozambiquePagination $pagination = null){
         
         return Yii::app()->controller->widget($this->getWidgetAlias(),array(
-            'timestampMap' => $timestampMap
+            'pagination' => $pagination
         ), TRUE);
     }
     
@@ -87,21 +117,21 @@ final class EKindMozambique extends CApplicationComponent {
      * @return IGrid
      */
     public function generateGrid($width = NULL,$height = NULL){
+        
         if($width === NULL){
             $width = $this->defaultGridWidth;
         }
+        
         if($height === NULL){
             $height = $this->defaultGridHeight;
         }
         
         $grid = Yii::createComponent($this->gridAlias);
-        
-        
         return $grid;
     }
     
     /**
-     * Generates a Grid Designer from the passed configuration
+     * Generates a Grid Designer from the component configuration
      * 
      * @return IMozambiqueGridDesigner
      */
@@ -110,11 +140,33 @@ final class EKindMozambique extends CApplicationComponent {
     }
     
     /**
-     * Generates a Gap Patcher from the passed configuration
+     * Generates a Gap Patcher based on the configuration
      * 
      * @return IMozambiqueGapPatcher
      */
     public function generateGapPatcher(){
-        return Yii::createComponent($this->gapPatcherAlias);
+        return $this->instantiateNonComponent($this->gapPatcherAlias);
+    }
+    
+    /**
+     * Generates a Gap based on the component's configuration
+     * 
+     * @return IMozambiqueGapPatcher
+     */
+    public function generateGap($x,$y){
+        return $this->instantiateNonComponent($this->gapAlias,array($x, $y));
+    }
+    
+    /**
+     * Generates a Point based on the component's configuration
+     * 
+     * @return IMozambiqueGapPatcher
+     */
+    public function generatePoint($x, $y){
+        return $this->instantiateNonComponent($this->pointAlias, array($x, $y));
+    }
+    
+    public function generateSorter(){
+        return Yii::createComponent($this->defaultSorter);
     }
 }

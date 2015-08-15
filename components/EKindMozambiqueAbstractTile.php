@@ -97,7 +97,7 @@ implements IMozambiqueTile{
     /**
      * Return the Left Top corner of the tile's position on the grid
      * 
-     * @returns array or bool FALSE if the item isn't positioned on the grid
+     * @returns \
      */
     public function getGridPosition() {
         return $this->gridPosition;

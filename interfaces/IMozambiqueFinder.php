@@ -12,8 +12,8 @@ interface IMozambiqueFinder {
      * 
      * Each implementation can decide on its own what selection criteria apply.
      * 
-     * @param array $timestampMap   Mozambique looks at the 
-     * @return IMozambiqueTile[]              Ususally a CTypedList
+     * @param IMozambiquePagination $pagination How to paginate the results
+     * @return IMozambiqueTileCollection
      */
-    function findItems($timestampMap = array());
+    function findItems(\IMozambiquePagination $pagination = array());
 }

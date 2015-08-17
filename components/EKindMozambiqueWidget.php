@@ -87,6 +87,7 @@ class EKindMozambiqueWidget extends CWidget{
     private function renderNav()
     {
         echo '<hr class="hidden" />';
+        
         echo '<div class="tiles navigation centered"><div>';
         echo CHtml::link(
                 Yii::t('phrases', 'older items'),

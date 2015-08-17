@@ -27,6 +27,7 @@ final class EKindMozambique extends CApplicationComponent {
     public $pointAlias = "ext.kindMozambique.components.EKindMozambiquePoint";
     public $gapAlias = "ext.kindMozambique.components.EKindMozambiqueGap";
     public $gapPatcherAlias = "ext.kindMozambique.components.EKindMozambiqueGapPatcher";
+    public $tileCollectionAlias = "ext.kindMozambique.components.EKindMozambiqueBaseTileCollection";
     
     public $defaultGridHeight = 6;
     public $defaultGridWidth = 5;
@@ -168,5 +169,23 @@ final class EKindMozambique extends CApplicationComponent {
     
     public function generateSorter(){
         return Yii::createComponent($this->defaultSorter);
+    }
+    
+    /**
+     * Generate a Tile collection to use with Mozambique Widgets
+     * 
+     * @param \CTypedList<IMozambiqueTile> $list
+     * @param \IMozambiquePagination $pagination
+     * @return IMozambiqueTileCollection
+     * @throws CException
+     */
+    public function generateTileCollection(\CTypedList $list, 
+            \IMozambiquePagination $pagination){
+        if($list->count() > 0 && !$list->itemAt(0) instanceof IMozambiqueTile){
+            throw new CException("generateTileCollection requires CTypedList of"
+                    . " IMozambiqueTile instances!");
+        }
+        
+        return $this->instantiateNonComponent($this->tileCollectionAlias, array($list,$pagination));
     }
 }

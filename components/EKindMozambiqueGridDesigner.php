@@ -56,9 +56,4 @@ implements IMozambiqueGridDesigner{
         
         
     }
-
-    public function getPaginationCriterion() {
-        
-    }
-
 }

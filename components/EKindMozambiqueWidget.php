@@ -39,10 +39,10 @@ class EKindMozambiqueWidget extends CWidget{
     public function init(){
         
         $this->htmlId =$this->id.'_KindGrid_TimeStamp';
-        $this->collectRequestPatrams();
+        $this->collectRequestParams();
 
         if(!$this->pagination){
-            $this->pagination = $this->collectRequestPatrams();
+            $this->pagination = $this->collectRequestParams();
         }
         
         if(!$this->tiles){
@@ -69,7 +69,7 @@ class EKindMozambiqueWidget extends CWidget{
     /**
      * Finds init parameters in the request.
      */
-    private function collectRequestPatrams(){
+    private function collectRequestParams(){
         
         $input =filter_input(INPUT_GET, $this->htmlId);
         if(is_array($input)){

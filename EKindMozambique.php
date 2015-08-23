@@ -1,7 +1,10 @@
 <?php
 
 /**
- * Appliction Component EKindMozambique
+ * Appliction Component EKindMozambique.
+ * 
+ * Also serves as a facade to Mozambique configuration. All extensions or
+ * integrations to mozambique should use the Facade facilities (get & generate).
  *
  * @author kiriakos
  */
@@ -13,22 +16,26 @@ final class EKindMozambique extends CApplicationComponent {
     // Components
     //
     // These can be configured via classical Yii Component configuration arrays
-    public $widgetAlias = "ext.kindMozambique.components.EKindMozambiqueWidget";
-    public $designerAlias = "ext.kindMozambique.components.EKindMozambiqueGridDesigner";
-    public $gridAlias = "ext.kindMozambique.components.EKindMozambiqueGrid";
-    public $defaultSorter = "ext.kindMozambique.components.EKindMozambiquePropertyBasedSorter";
+    public $widget = "ext.kindMozambique.components.EKindMozambiqueWidget";
+    public $designer = "ext.kindMozambique.components.EKindMozambiqueGridDesigner";
+    public $grid = "ext.kindMozambique.components.EKindMozambiqueGrid";
+    public $sorter = "ext.kindMozambique.components.EKindMozambiquePropertyBasedSorter";
+    public $paginationScraper = "ext.kindMozambique.components.EKindMozambiquePaginationScraper";
     
     ////////////////////////////////////////////////////////////////////////////
     // Non Components
     //
     // These classes provide very specialized functionality and have speciffic 
-    // instantiation requirements. Chack the constructors on their interfaces 
-    // for more information
+    // instantiation requirements. Check the constructors on their interfaces 
+    // or base implementations for more information.
     public $pointAlias = "ext.kindMozambique.components.EKindMozambiquePoint";
     public $gapAlias = "ext.kindMozambique.components.EKindMozambiqueGap";
     public $gapPatcherAlias = "ext.kindMozambique.components.EKindMozambiqueGapPatcher";
     public $tileCollectionAlias = "ext.kindMozambique.components.EKindMozambiqueBaseTileCollection";
     
+    ////////////////////////////////////////////////////////////////////////////
+    // The CSS Delivered with Mozambique provides for base grids up to width 5
+    // if You want to provide bigger grids You will have to include your own CSS
     public $defaultGridHeight = 6;
     public $defaultGridWidth = 5;
     
@@ -73,14 +80,14 @@ final class EKindMozambique extends CApplicationComponent {
     
     /**
      * 
-     * @return interfaces\IItemFinder
+     * @return \IMozambiqueFinder
      */
     public function getFinder(){
         return $this->finder;
     }
     
     public function getWidgetAlias(){
-        return $this->widgetAlias;
+        return $this->widget;
     }
     
     /**
@@ -91,7 +98,7 @@ final class EKindMozambique extends CApplicationComponent {
      */
     public function renderWidget(IMozambiquePagination $pagination = null){
         
-        return Yii::app()->controller->widget($this->getWidgetAlias(),array(
+        return Yii::app()->controller->widget($this->widget,array(
             'pagination' => $pagination
         ), TRUE);
     }
@@ -103,7 +110,7 @@ final class EKindMozambique extends CApplicationComponent {
      */
     public function renderWidgetWithItems($tiles){
         
-        return Yii::app()->controller->widget($this->getWidgetAlias(),array(
+        return Yii::app()->controller->widget($this->widget, array(
             'tiles' => $tiles
         ), TRUE);
     }
@@ -111,11 +118,11 @@ final class EKindMozambique extends CApplicationComponent {
     /**
      * Generates an empty grid preconfigured for the given dimensions.
      * 
-     * The type of grid produced can be manipulated via the gridAlias property
+     * The type of grid produced can be manipulated via the grid property
      * 
      * @param int $width
      * @param int $height
-     * @return IGrid
+     * @return IMozambiqueGrid
      */
     public function generateGrid($width = NULL,$height = NULL){
         
@@ -127,7 +134,7 @@ final class EKindMozambique extends CApplicationComponent {
             $height = $this->defaultGridHeight;
         }
         
-        $grid = Yii::createComponent($this->gridAlias);
+        $grid = Yii::createComponent($this->grid);
         return $grid;
     }
     
@@ -137,7 +144,7 @@ final class EKindMozambique extends CApplicationComponent {
      * @return IMozambiqueGridDesigner
      */
     public function generateDesigner(){
-        return Yii::createComponent($this->designerAlias);
+        return Yii::createComponent($this->designer);
     }
     
     /**
@@ -168,7 +175,7 @@ final class EKindMozambique extends CApplicationComponent {
     }
     
     public function generateSorter(){
-        return Yii::createComponent($this->defaultSorter);
+        return Yii::createComponent($this->sorter);
     }
     
     /**
@@ -187,5 +194,25 @@ final class EKindMozambique extends CApplicationComponent {
         }
         
         return $this->instantiateNonComponent($this->tileCollectionAlias, array($list,$pagination));
+    }
+    
+    /**
+     * Generates a pagination instance
+     * 
+     * Override $this->pagination to include Your own pagination class. This 
+     * class is globaly used to generate a pagination for a class.
+     * 
+     * 
+     * @param string $class
+     * @param mixed $args
+     * @return CPagination
+     */
+    public function generatePagination($class, $args){
+        $properties = array_merge(array($class), $args);
+        return $this->instantiateNonComponent($this->pagination, $properties);
+    }
+    
+    public function getPageScraper(){
+        return Yii::createComponent($this->paginationScraper);
     }
 }

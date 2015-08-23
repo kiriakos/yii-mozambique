@@ -29,4 +29,12 @@ interface IMozambiquePagination {
      * @param CPagination $pagination
      */
     public function setPaginationFor($class, CPagination $pagination);    
+    
+    
+    /**
+     * Scrape the pagination out of request parameters
+     * 
+     * @return IMozambiquePagination
+     */
+    public function scrapePagination();
 }

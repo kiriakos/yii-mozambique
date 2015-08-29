@@ -20,7 +20,7 @@ interface IMozambiquePagination {
      * @param string $class
      * @return CPagination
      */
-    public function getPaginationFor($class);     
+    public function getPaginationFor($class);
     
     /**
      * Set the pagination for a class
@@ -28,7 +28,7 @@ interface IMozambiquePagination {
      * @param string $class
      * @param CPagination $pagination
      */
-    public function setPaginationFor($class, CPagination $pagination);    
+    public function setPaginationFor($class, CPagination $pagination);
     
     
     /**

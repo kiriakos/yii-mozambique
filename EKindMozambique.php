@@ -21,6 +21,7 @@ final class EKindMozambique extends CApplicationComponent {
     public $grid = "ext.kindMozambique.components.EKindMozambiqueGrid";
     public $sorter = "ext.kindMozambique.components.EKindMozambiquePropertyBasedSorter";
     public $paginationScraper = "ext.kindMozambique.components.EKindMozambiquePaginationScraper";
+    public $pagination = "ext.kindMozambique.components.EKindMozambiqueSimplePagination";
     
     ////////////////////////////////////////////////////////////////////////////
     // Non Components
@@ -202,7 +203,6 @@ final class EKindMozambique extends CApplicationComponent {
      * Override $this->pagination to include Your own pagination class. This 
      * class is globaly used to generate a pagination for a class.
      * 
-     * 
      * @param string $class
      * @param mixed $args
      * @return CPagination
@@ -214,5 +214,9 @@ final class EKindMozambique extends CApplicationComponent {
     
     public function getPageScraper(){
         return Yii::createComponent($this->paginationScraper);
+    }
+    
+    public function getPagination(){
+        return Yii::createComponent($this->pagination);
     }
 }

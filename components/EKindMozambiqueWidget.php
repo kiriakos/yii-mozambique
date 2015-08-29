@@ -44,6 +44,9 @@ class EKindMozambiqueWidget extends CWidget{
         if(!$this->pagination){
             $this->pagination = $this->collectRequestParams();
         }
+        elseif(!$this->pagination instanceof IMozambiquePagination){
+            throw new EKindMozambiqueTypeException($this->pagination, "IMozambiquePagination");
+        }
         
         if(!$this->tiles){
             $this->tiles = Yii::app()->mozambique->getFinder()

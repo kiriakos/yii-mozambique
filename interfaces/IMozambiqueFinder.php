@@ -15,5 +15,5 @@ interface IMozambiqueFinder {
      * @param IMozambiquePagination $pagination How to paginate the results
      * @return IMozambiqueTileCollection
      */
-    function findItems(\IMozambiquePagination $pagination = array());
+    function findItems(\IMozambiquePagination $pagination = NULL);
 }

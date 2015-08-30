@@ -33,7 +33,7 @@ implements IMozambiqueGridDesigner{
     public function layout() {
         foreach($this->tiles as $tile)
         {
-            $success = $this->grid->addItem($tile);
+            $success = $this->grid->addTile($tile);
 
             // addItem returns false if grid is full and can't be modified 
             // anymore. Should this happen the grid population should finish
@@ -53,7 +53,5 @@ implements IMozambiqueGridDesigner{
     public function order() {
         $sorter = Yii::app()->mozambique->generateSorter();
         usort($this->tiles, array($sorter,"sort"));
-        
-        
     }
 }

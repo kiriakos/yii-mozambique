@@ -24,9 +24,9 @@ class EKindMozambiqueWidget extends CWidget{
 
     /**
      * Grid Items to use
-     * @var IMozambiqueTile[]
+     * @var IMozambiqueTileCollection
      */
-    public $tiles = FALSE;
+    public $tilesCollection = FALSE;
     
     /**
      * Pagination information. This is collected from the Request by default.
@@ -53,13 +53,13 @@ class EKindMozambiqueWidget extends CWidget{
                     . " be an instance of IMozambiquePagination");
         }
         
-        if(!$this->tiles){
-            $this->tiles = Yii::app()->mozambique->getFinder()
+        if(!$this->tilesCollection){
+            $this->tilesCollection = Yii::app()->mozambique->getFinder()
                     ->findItems($this->pagination);
         }
         
         $this->designer = Yii::app()->mozambique->generateDesigner();
-        $this->designer->setTiles($this->tiles);
+        $this->designer->setTiles($this->tilesCollection->getTiles());
         $this->designer->order();
         $this->designer->layout();
     }

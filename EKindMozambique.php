@@ -91,7 +91,7 @@ final class EKindMozambique extends CApplicationComponent {
     }
     
     /**
-     * 
+     * Render a preconfigured Grid Widget
      * 
      * @param IMozambiquePagination $pagination
      * @return string
@@ -104,14 +104,16 @@ final class EKindMozambique extends CApplicationComponent {
     }
     
     /**
+     * Render a preconfigured Grid Widget with a specific tile collection
      * 
-     * @param IMozambiqueTile[] $tiles
+     * @param IMozambiqueTileCollection $collection
      * @return string
      */
-    public function renderWidgetWithItems($tiles){
+    public function renderWidgetWithItems(
+            \IMozambiqueTileCollection $collection){
         
         return Yii::app()->controller->widget($this->widget, array(
-            'tiles' => $tiles
+            'tileCollection' => $collection
         ), TRUE);
     }
     

@@ -142,4 +142,9 @@ implements IMozambiqueGrid{
             $gaps = $this->getGaps();
         }
     }
+
+    public function getDimensions() {
+        return array($this->getWidth(), $this->getHeight());
+    }
+
 }

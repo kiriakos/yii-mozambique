@@ -6,7 +6,7 @@
  * 
  * @author kiriakos
  */
-class EKinMozambiqueBaseTileCollection 
+class EKindMozambiqueBaseTileCollection 
 implements IMozambiqueTileCollection{
     
     private $tiles;

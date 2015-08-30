@@ -26,6 +26,11 @@ interface IMozambiqueTile {
     function getDesiredDimensions();
     
     /**
+     * @return array    The current dimensions Width followed by height.
+     */
+    function getDimensions();
+    
+    /**
      * @return boolean  Success or not.
      */
     public function heighten();

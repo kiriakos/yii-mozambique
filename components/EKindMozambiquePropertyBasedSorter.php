@@ -20,6 +20,14 @@ implements IMozambiqueSorter{
      */
     public $property = "date_u";
     
+    
+    /**
+     * An array of calls that will happen on a and b before properties are compared
+     *
+     * @var string[]
+     */
+    public $drilldown = array("getRecord");
+    
     /**
      * The sorting function
      * 
@@ -27,7 +35,13 @@ implements IMozambiqueSorter{
      * @param object $b
      */
     public function sort($a, $b) {
+        
         $prop= $this->property;
+        
+        foreach($this->drilldown as $call){
+            $a = call_user_func(array($a, $call));
+            $b = call_user_func(array($b, $call));
+        }
         
         if($a->$prop == $b->$prop){
             return 0;

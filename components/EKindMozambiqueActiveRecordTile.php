@@ -134,4 +134,18 @@ implements IMozambiqueTile {
             throw new EKindMozambiqueSizeOutOfBoundsException($msg);
         }
     }
+    
+    /**
+     * Get the underlying record
+     * 
+     * @return \IPresentableActiveRecord
+     */
+    public function getRecord(){
+        return $this->record;
+    }
+
+    public function getDimensions() {
+        return array($this->getWidth(), $this->getHeight());
+    }
+
 }

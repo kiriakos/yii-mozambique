@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Appliction Component EKindMozambique.
  * 
@@ -97,7 +96,7 @@ final class EKindMozambique extends CApplicationComponent {
      * @param IMozambiquePagination $pagination
      * @return string
      */
-    public function renderWidget(IMozambiquePagination $pagination = null){
+    public function renderWidget(\IMozambiquePagination $pagination = NULL){
         
         return Yii::app()->controller->widget($this->widget,array(
             'pagination' => $pagination
@@ -215,7 +214,11 @@ final class EKindMozambique extends CApplicationComponent {
     public function getPageScraper(){
         return Yii::createComponent($this->paginationScraper);
     }
-    
+
+    /**
+     * 
+     * @return IMozambiquePagination
+     */
     public function getPagination(){
         return Yii::createComponent($this->pagination);
     }

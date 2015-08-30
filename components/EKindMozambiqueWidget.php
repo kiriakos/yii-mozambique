@@ -3,7 +3,14 @@
 /**
  * Layouting widget that allows content to be aranged in interesting tiles.
  *
+ * You directly pass tiles (\IMozambiqueTile[]) or a pagination.
+ * If tiles are passed the finder will not be used.
+ * If pagination is passed the default finder configured for the mozambique
+ * application component will be invoked with the pagination.
  * 
+ * If nothing is passed the configured finder will be invoked without an 
+ * explicit pagination. NOTE: the finder might internaly do it's own scraping
+ * of pagination data (like: KindStudiosItemFinder does).
  * 
  * @author kiriakos
  */
@@ -39,13 +46,11 @@ class EKindMozambiqueWidget extends CWidget{
     public function init(){
         
         $this->htmlId =$this->id.'_KindGrid_TimeStamp';
-        $this->collectRequestParams();
-
-        if(!$this->pagination){
-            $this->pagination = $this->collectRequestParams();
-        }
-        elseif(!$this->pagination instanceof IMozambiquePagination){
-            throw new EKindMozambiqueTypeException($this->pagination, "IMozambiquePagination");
+        
+        if($this->pagination !== NULL 
+                && !$this->pagination instanceof IMozambiquePagination){
+            throw new UnexpectedValueException(get_class(). "::pagination must"
+                    . " be an instance of IMozambiquePagination");
         }
         
         if(!$this->tiles){
@@ -67,21 +72,6 @@ class EKindMozambiqueWidget extends CWidget{
         $this->designer->getGrid()->render(FALSE);
         $this->renderNav();
         $this->renderInfiniScroll();
-    }
-    
-    /**
-     * Finds init parameters in the request.
-     */
-    private function collectRequestParams(){
-        
-        $input =filter_input(INPUT_GET, $this->htmlId);
-        if(is_array($input)){
-            return $input;
-        }
-        else{
-            return array();
-        }
-            
     }
     
     /**

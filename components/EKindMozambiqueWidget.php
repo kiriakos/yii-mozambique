@@ -79,12 +79,16 @@ class EKindMozambiqueWidget extends CWidget{
      */
     private function renderNav()
     {
+        $pagination = $this->tilesCollection->getPagination();
+        $name = $pagination->getPaginationName();
+        $value = $pagination->getPaginationQueryString(1);
+        
         echo '<hr class="hidden" />';
         
         echo '<div class="tiles navigation centered"><div>';
         echo CHtml::link(
                 Yii::t('phrases', 'older items'),
-                array('', $this->htmlId=>$this->designer->getOldestTimestamp()),
+                array('', $name => $value),
                 array('class'=>'button navigation next')
         );
         echo '</div></div>';

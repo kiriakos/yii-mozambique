@@ -43,12 +43,12 @@ Implements IMozambiquePagination{
         return $this->pagination[$this->getClass($class)];
     }
 
-    public function getPaginationQueryString() {
+    public function getPaginationQueryString($shift = 0) {
         $strs = array();
         
         foreach($this->pagination as $class => $pagination){
-            $size = $pagination->getSize();
-            $page = $pagination->getPage();
+            $size = $pagination->getPageSize();
+            $page = $pagination->getCurrentPage() + $shift;
             $strs[] = rawurlencode("$class=$size:$page");
         }
         
@@ -109,4 +109,9 @@ Implements IMozambiquePagination{
     public function setPaginationFor($class, \CPagination $pagination) {
         $this->pagination[$this->getClass($class)] = $pagination;
     }
+
+    public function getPaginationName() {
+        return $this->name;
+    }
+
 }

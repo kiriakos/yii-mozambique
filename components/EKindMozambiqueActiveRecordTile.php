@@ -135,6 +135,10 @@ implements IMozambiqueTile {
         }
     }
     
+    public function getDimensions() {
+        return array($this->getWidth(), $this->getHeight());
+    }
+    
     /**
      * Get the underlying record
      * 
@@ -143,9 +147,4 @@ implements IMozambiqueTile {
     public function getRecord(){
         return $this->record;
     }
-
-    public function getDimensions() {
-        return array($this->getWidth(), $this->getHeight());
-    }
-
 }

@@ -126,7 +126,7 @@ final class EKindMozambique extends CApplicationComponent {
      * @param int $height
      * @return IMozambiqueGrid
      */
-    public function generateGrid($width = NULL,$height = NULL){
+    public function generateGrid($width = NULL, $height = NULL){
         
         if($width === NULL){
             $width = $this->defaultGridWidth;
@@ -136,8 +136,8 @@ final class EKindMozambique extends CApplicationComponent {
             $height = $this->defaultGridHeight;
         }
         
-        $grid = Yii::createComponent($this->grid);
-        return $grid;
+        return $this->instantiateNonComponent($this->grid, 
+                array($width, $height));
     }
     
     /**

@@ -78,7 +78,7 @@ implements IMozambiqueGrid{
         $x = $point->getX();
         $y = $point->getY();
         
-        if($x < 0 || $y < 0){
+        if( $x < 0 || $y < 0 ){
             throw new EKindMozambiqueSizeOutOfBoundsException("X and Y must"
                     . " be non negative integers!");
         }
@@ -95,11 +95,26 @@ implements IMozambiqueGrid{
     public function addTile(\IMozambiqueTile $tile) {
         
         $counter = 10;
-        while(($added = $this->tryAdding($tile)) === FLASE && --$counter){
-            $tile->unWiden() || $tile->unHeighten() || $this->heighten();
+        while(($added = $this->tryAdding($tile)) === FALSE && --$counter){
+            if($tile->canUnwiden()){
+                $tile->unWiden();
+            }
+            elseif($tile->canUnHeighten()){
+                $tile->unHeighten();
+            }
+            elseif($this->canHeighten()){
+                $this->heighten();
+            }
         }
 
         return $added;
+    }
+    
+    public function heighten() {
+        $row = array_fill(0, $this->getWidth(), NULL);
+        $this->grid[] = $row;
+        
+        parent::heighten();
     }
     
     /**
@@ -119,6 +134,58 @@ implements IMozambiqueGrid{
         
         return FALSE;
     }
+    
+    
+    /**
+     * Get a free patch in the grid based on passed dimensions.
+     * 
+     * iterates over the grid to identify empty points
+     * 
+     * @param integer[] $dims
+     * @return \IMozambiquePoint
+     */
+    private function getSpace($dims)
+    {
+        foreach ($this->grid as $rowId => $row){
+            foreach ($row as $tileId => $tile){
+                if ($this->tileIsEmpty($tile) 
+                        && $this->tilesAreEmpty(array($tileId, $rowId), $dims)){
+                    return Yii::app()->mozambique->generatePoint(
+                            $tileId,$rowId);
+                }
+            }
+        }
+
+        return FALSE;
+    }
+    
+    private function tileIsEmpty($tile){
+        return $tile === FALSE || $tile instanceof EKindMozambiqueGap;
+    }
+    
+    /**
+     *
+     * @param integer[] $position hxw
+     * @param integer[] $dims   wxh
+     * @return boolean
+     */
+    private function tilesAreEmpty($position,$dims)
+    {
+        //for each row of the grid
+        for($i=$position[1]; $i<$position[1]+$dims[1]; $i++){
+            //for each tile in row
+            for($j=$position[0]; $j<$position[0]+$dims[0]; $j++){
+                
+                if ( $i > $this->height-1 || $j > $this->width-1 || 
+                        !$this->tileIsEmpty($this->grid[$i][$j])){
+                    return FALSE;
+                }
+            }
+        }
+
+        return TRUE;
+    }
+
     
     public function removeTile(\IMozambiqueTile $tile){
         foreach($this->grid as $r=>$row){

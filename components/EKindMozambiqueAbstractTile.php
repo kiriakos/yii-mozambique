@@ -77,7 +77,7 @@ implements IMozambiqueTile{
             $this->height -= 1;
         }
         else{
-            $msg = "The height of ". $this->record->getUniqueTitle(). " was"
+            $msg = "The height of ". $this->getRecord()->getUniqueTitle(). " was"
                     . " reduced to 0!";
             throw new EKindMozambiqueSizeOutOfBoundsException($msg);
         }            
@@ -88,7 +88,7 @@ implements IMozambiqueTile{
             $this->width -= 1;
         }
         else{
-            $msg = "The width of ". $this->record->getUniqueTitle(). " was"
+            $msg = "The width of ". $this->getRecord()->getUniqueTitle(). " was"
                     . " reduced to 0!";
             throw new EKindMozambiqueSizeOutOfBoundsException($msg);
         }      

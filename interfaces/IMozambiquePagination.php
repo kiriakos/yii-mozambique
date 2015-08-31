@@ -31,9 +31,10 @@ interface IMozambiquePagination {
      * Typically the pagination implementation will read the expected pagiantion
      * name via setPaginationName($prefix).
      * 
+     * @param integer $shift The amount of pages to shift
      * @return string
      */
-    public function getPaginationQueryString();
+    public function getPaginationQueryString($shift = 0);
     
     /**
      * This will identify the Name of the Query string fragement.
@@ -47,6 +48,15 @@ interface IMozambiquePagination {
      * @param string $name  The name to be used.
      */
     public function setPaginationName($name);
+    
+    /**
+     * Getter for the name of the pagination
+     * 
+     * @see IMozambiquePagination::setPaginationName()
+     * 
+     * @param type $name
+     */
+    public function getPaginationName();
     
     /**
      * Get a pagination object for a class

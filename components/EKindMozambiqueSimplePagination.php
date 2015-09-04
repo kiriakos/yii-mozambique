@@ -46,12 +46,11 @@ Implements IMozambiquePagination{
     public function getPaginationQueryString($shift = 0) {
         $strs = array();
         
-        foreach($this->pagination as $class => $pagination){
-            $size = $pagination->getPageSize();
-            $page = $pagination->getCurrentPage() + $shift;
-            $strs[] = rawurlencode("$class=$size:$page");
+        foreach($this->pagination as $pagination){
+            
+            $page = $pagination->getCurrentPage() + $shift + 1;
+            $strs[] = $pagination->pageVar. "=". $page;
         }
-        
         return join("&",$strs);
     }
 
@@ -62,32 +61,72 @@ Implements IMozambiquePagination{
      * Class1=size:page&Class2=size:page...
      * out of a predefined GET variable (the pagination name @see setPaginationName)
      * 
+     * TODO: This should only be allowed to run once.
+     * 
      * @return boolean Whether request data existed or not
      */
-    public function scrapePagination() {
+    public function scrapePagination($classes = array()) {
         
-        $input =filter_input(INPUT_GET, get_class());
-            
-        if($input === NULL){
-            // Variable not in __GET[]
-            return FALSE;
+        $this->prepareRequestEnvironment($classes);
+        
+        foreach ($classes as $class=>$pageSize){
+
+            $pgn = $this->createClassPagination($class, $pageSize);
+            $this->setPaginationFor($class, $pgn);
         }
-        else{
-            $pages = explode("&", rawurldecode($input));
-            foreach ($pages as $page){
-                
-                $set = explode("=", $page);
-                $class = $set[0];
-                $props = explode(":", $set[1]);
-                
-                $pgn = new CPagination();
-                $pgn->setPageSize($props[0]);
-                $pgn->setCurrentPage($props[1]);
-                $this->setPaginationFor($class, $pgn);
+        return TRUE;
+    }
+    
+    /**
+     * Prepares the runtime's rewuest environment
+     * 
+     * Due to limitations in Yii's CHtml::link EKindMozambiqueSimplePagination
+     * renders all it's page parameters down to one URL query parameter. This
+     * method undoes this and sets $_GET entries as they will be awaited by the
+     * CPagination instances for each class.
+     * 
+     * @return boolean
+     */
+    private function prepareRequestEnvironment($classes){
+        
+        if($this->prepared){
+            return TRUE;
+        }
+        
+        $inputRaw = filter_input(INPUT_GET, $this->getPaginationName());
+
+        if(!$inputRaw){
+            foreach( array_keys($classes) as $class){
+                $_GET[$this->getPaginationName()."-".$class] = 1;
             }
         }
+        else
+        {
+            $input = explode("&", rawurldecode($inputRaw));
+            
+            foreach( $input as $pages){
+                $set = explode("=", $pages);
+                $_GET[$set[0]] = $set[1];
+            }
+        }   
+
+        return $this->prepared = TRUE;
+    }
+    private $prepared = FALSE;
+    
+    /**
+     * 
+     * @param type $class
+     * @param type $pageSize
+     * @return \CPagination
+     */
+    private function createClassPagination($class, $pageSize){
+        $pgn = new CPagination();
+        $pgn->validateCurrentPage = FALSE;
+        $pgn->pageVar = $this->getPaginationName()."-".$class;        
+        $pgn->setPageSize($pageSize);
         
-        return TRUE;
+        return $pgn;
     }
 
     
@@ -107,7 +146,13 @@ Implements IMozambiquePagination{
     }
     
     public function setPaginationFor($class, \CPagination $pagination) {
-        $this->pagination[$this->getClass($class)] = $pagination;
+        
+        if(isset($this->pagination[$this->getClass($class)])){
+            throw new CException("Now What?");
+        }
+        else{
+            $this->pagination[$this->getClass($class)] = $pagination;
+        }
     }
 
     public function getPaginationName() {

@@ -88,5 +88,5 @@ interface IMozambiquePagination {
      * 
      * @return IMozambiquePagination
      */
-    public function scrapePagination();
+    public function scrapePagination($pageSizes=array());
 }

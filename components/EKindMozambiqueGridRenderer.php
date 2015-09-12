@@ -4,7 +4,7 @@
  *
  * @author kiriakos
  */
-class EKindGridRenderer 
+class EKindMozambiqueGridRenderer 
 extends CComponent{
     
     /**
@@ -21,7 +21,7 @@ extends CComponent{
         
         $this->addItemPositionalModifyerClasses();
 
-        $result = $this->renderOpenHtml( !$this->grid->isSubGrid(), $return);
+        $result = $this->renderOpenHtml( $this->grid->isMainGrid(), $return);
 
         foreach($this->grid->getItems() as $item){
             if($item){
@@ -84,9 +84,5 @@ extends CComponent{
         else{
             echo $result;
         }
-    }
-    
-    public function stylize(){
-        
     }
 }

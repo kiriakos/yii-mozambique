@@ -22,7 +22,6 @@ final class EKindMozambique extends CApplicationComponent {
     public $paginationScraper = "ext.kindMozambique.components.EKindMozambiquePaginationScraper";
     public $pagination = "ext.kindMozambique.components.EKindMozambiqueSimplePagination";
     public $uuidGen = "ext.kindMozambique.components.EKindUuidGen";
-    public $gridRenderer = "ext.kindMozambique.components.EKindGridRenderer";
     
     ////////////////////////////////////////////////////////////////////////////
     // Non Components
@@ -34,6 +33,8 @@ final class EKindMozambique extends CApplicationComponent {
     public $gapAlias = "ext.kindMozambique.components.EKindMozambiqueGap";
     public $gapPatcherAlias = "ext.kindMozambique.components.EKindMozambiqueGapPatcher";
     public $tileCollectionAlias = "ext.kindMozambique.components.EKindMozambiqueBaseTileCollection";
+    public $gridRenderer = "ext.kindMozambique.components.EKindMozambiqueGridRenderer";
+    public $gridStylizer = "ext.kindMozambique.components.EKindMozambiqueGridStylizer";
     
     ////////////////////////////////////////////////////////////////////////////
     // The CSS Delivered with Mozambique provides for base grids up to width 5
@@ -233,5 +234,9 @@ final class EKindMozambique extends CApplicationComponent {
     
     public function generateGridRenderer(\IMozambiqueGrid $grid){
         return $this->instantiateNonComponent($this->gridRenderer, array($grid));
+    }
+    
+    public function generateGridStylizer(\IMozambiqueGrid $grid){
+        return $this->instantiateNonComponent($this->gridStylizer, array($grid));
     }
 }

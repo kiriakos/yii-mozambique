@@ -18,6 +18,7 @@ implements IMozambiqueGrid{
     private $grid;
     
     private $renderer;
+    private $stylizer;
     
     private $id;
     
@@ -34,6 +35,7 @@ implements IMozambiqueGrid{
         $this->grid = $grid;
         $this->id = Yii::app()->mozambique->generateUuid();
         $this->renderer = Yii::app()->mozambique->generateGridRenderer($this);
+        $this->stylizer = Yii::app()->mozambique->generateGridStylizer($this);
     }
             
     public function getDesiredDimensions() {
@@ -267,6 +269,6 @@ implements IMozambiqueGrid{
     }
     
     public function stylize(){
-        $this->renderer->stylize();
+        $this->stylizer->stylize();
     }
 }

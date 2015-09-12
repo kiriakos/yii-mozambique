@@ -11,7 +11,15 @@ class EKindMozambiqueGrid
 extends EKindMozambiqueAbstractTile 
 implements IMozambiqueGrid{
     
+    /**
+     *  A 2D array of tiles
+     * @var IMozambiqueTile[][]
+     */
     private $grid;
+    
+    private $renderer;
+    
+    private $id;
     
     public function __construct($width = 1, $height = 1) {
         
@@ -24,22 +32,20 @@ implements IMozambiqueGrid{
         }
         
         $this->grid = $grid;
+        $this->id = Yii::app()->mozambique->generateUuid();
+        $this->renderer = Yii::app()->mozambique->generateGridRenderer($this);
     }
             
     public function getDesiredDimensions() {
-        
+        throw new CException("getDesiredDimensions() is not Implemented!");
     }
 
     public function getId() {
-        
-    }
-
-    public function getLastTimestamp() {
-        
+        return $this->id;
     }
 
     public function render($return = TRUE) {
-        
+        return $this->renderer->render($return);
     }    
     
     /**
@@ -214,4 +220,53 @@ implements IMozambiqueGrid{
         return array($this->getWidth(), $this->getHeight());
     }
 
+    public function get2d() {
+        return $this->grid;
+    }
+    
+    /**
+     * Get the items defined by the rect $left, $top, $right, $bottom
+     *
+     * the dims are given inclusive, getItems(0,0,1,2) will return max 6 items
+     * (0.0, 0.1, 0.2, 1.0, 1.1, 1.2) items that consume multiple positions are
+     * returned only once
+     *
+     * @param integer[] $rect       (left,top,right,bottom)
+     * @return IMozambiqueTile[]
+     */
+    public function getItems($rect=false) {
+        if($rect){
+            $left   = $rect[0];
+            $top    = $rect[1];
+            $right  = $rect[2];
+            $bottom = $rect[3];
+        }else{
+            $left   = 0;
+            $top    = 0;
+            $right  = $this->width-1;
+            $bottom = $this->height-1;
+        }
+
+        $items = array();
+
+        for($row=$top;$row<=$bottom;$row++){
+            //precaution for an ill computed merge grid
+            if($row == $this->height){
+                return $items;
+            }
+            for($tile=$left;$tile<=$right;$tile++){ 
+                //added check for False condition on if
+                if($this->grid[$row][$tile] 
+                        && !in_array($this->grid[$row][$tile], $items, true)){
+                    $items[]=$this->grid[$row][$tile];
+                }
+            }
+        }
+
+        return $items;
+    }
+    
+    public function stylize(){
+        $this->renderer->stylize();
+    }
 }

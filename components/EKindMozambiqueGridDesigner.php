@@ -44,6 +44,7 @@ implements IMozambiqueGridDesigner{
         }
         
         $this->grid->fillGaps();
+        $this->grid->stylize();
     }
 
     public function setTiles(CTypedList $tiles) {

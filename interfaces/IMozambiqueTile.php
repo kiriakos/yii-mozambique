@@ -6,20 +6,6 @@
 interface IMozambiqueTile {
     
     /**
-     * Used by Mozambique to order the passed items and to pass page parameters
-     * 
-     * A unix timestamp.
-     * 
-     * Kind Mozambique will take a look on all passed ITile object's 
-     * getLatestTimestamp() return value. These values arenused to order the 
-     * tiles (presenting newer ones first) and to collect pagin informtaion
-     * that is passed to infinitescroll to load followup datasets.
-     * 
-     * @return int
-     */
-    function getLastTimestamp();
-    
-    /**
      * @return array    A touple. The first item represents the desired width.
      *                  The second item represents the desired height.
      */
@@ -99,5 +85,28 @@ interface IMozambiqueTile {
      * @param \IMozambiquePoint $position
      */
     public function setGridPosition(\IMozambiquePoint $position);
-       
+    
+    
+    /**
+     * @return string[]
+     */
+    public function getClasses();
+    
+    /**
+     * 
+     * @param string[] $classes
+     */
+    public function setClasses($classes);
+    
+    /**
+     * 
+     * @param string $class
+     */
+    public function addClass($class);
+    
+    /**
+     * 
+     * @param string $class
+     */
+    public function removeClass($class);
 }

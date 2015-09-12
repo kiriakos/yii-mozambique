@@ -1,11 +1,18 @@
 <?php
 /**
- * Defines an ActiveRecord instance that can be presented by Mozambique AR Tiles
+ * Defines an object that can produce a representation (rendering) of something.
+ *  
+ * This can be an object of the pattern of "Model and View" or just an
+ * ActiveRecord instance that can be presented by Mozambique AR Tiles.
  *
+ * 
  * @author kiriakos
  */
-interface IPresentableActiveRecord {
+interface IMozambiqueRenderable {
+    
+    
     /**
+     * The base render call
      * 
      * @param integer $width
      * @param integer $height

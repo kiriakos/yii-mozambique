@@ -8,7 +8,6 @@
  * This tile misses following functions: 
  *  - IMozambiqueTile::render()
  *  - IMozambiqueTile::getId()
- *  - IMozambiqueTile::getLastTimestamp()
  *  - IMozambiqueTile::getDesiredDimensions()
  *  
  * @author kiriakos
@@ -110,5 +109,50 @@ implements IMozambiqueTile{
      */
     public function setGridPosition(\IMozambiquePoint $position) {
         $this->gridPosition = $position;
+    }
+    
+    /**
+     * A naive hash set. The structure is key=>value wehere value is always null
+     * 
+     * Sadly PHP does not support a Hash set for native types like strigns.
+     * 
+     * @var array
+     */
+    private $classes = array();
+    
+    public function addClass($class) {
+        
+        if(!is_string($class)){
+            throw new UnexpectedValueException("The Class argument in"
+                    . " IMozambiqueTile::addClass() should be a string!");
+        }
+        $this->classes[$class] = NULL;
+    }
+
+    public function getClasses() {
+        return array_keys($this->classes);
+    }
+
+    public function removeClass($class) {
+        unset($this->classes[$class]);
+    }
+
+    /**
+     * Sets the classes to the passed array, ignoring any existing ones.
+     * 
+     * This method expects a classic list of strings, not the fancy struct that 
+     * EKindMozambiqueAbstractTile uses internaly.
+     * 
+     * @param string[] $classes
+     * @throws UnexpectedValueException
+     */
+    public function setClasses($classes) {
+        
+        if(!is_array($classes)){
+            throw new UnexpectedValueException("The Classes argument in"
+                    . " IMozambiqueTile::setClasses() should be an array of strings!");
+        }
+        
+        $this->classes = array_flip($classes);        
     }
 }

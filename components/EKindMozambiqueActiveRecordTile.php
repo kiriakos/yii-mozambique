@@ -1,6 +1,6 @@
 <?php
 /**
- * Implementation of IMozambique Tile encapsulating (and hiding) an IPresentableActiveRecord.
+ * Implementation of IMozambique Tile encapsulating (and hiding) an IMozambiqueRenderable.
  * 
  * 
  *
@@ -48,11 +48,11 @@ implements IMozambiqueTile {
     
     /**
      *  An instance of an object that can be displayed on the front page
-     * @var IPresentableActiveRecord
+     * @var IMozambiqueRenderable
      */
     private $record;
 
-    public function __construct(IPresentableActiveRecord $record, $width = null,
+    public function __construct(IMozambiqueRenderable $record, $width = null,
             $height= null){
         
         $this->record = $record;
@@ -104,10 +104,6 @@ implements IMozambiqueTile {
         return $this->id;
     }
 
-    public function getLastTimestamp() {
-        return $this->record->getLastTimestamp();
-    }
-
 
     public function render($return = TRUE) {
         return $this->record->renderTile($return);
@@ -142,7 +138,7 @@ implements IMozambiqueTile {
     /**
      * Get the underlying record
      * 
-     * @return \IPresentableActiveRecord
+     * @return \IMozambiqueRenderable
      */
     public function getRecord(){
         return $this->record;

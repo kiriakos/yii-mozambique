@@ -36,4 +36,34 @@ interface IMozambiqueGrid extends IMozambiqueTile{
      * @param \IMozambiqueTile $tile
      */
     public function removeTile(\IMozambiqueTile $tile);
+    
+    /**
+     * Get a 2D representation of the grid.
+     * 
+     * The First array level represents rows starting from the top of the grid.
+     * 
+     * @return \IMozambiqueTile[][]
+     */
+    public function get2d();
+    
+    /**
+     * 
+     * @return \IMozambiqueTile[]
+     */
+    public function getItems($rect = false);
+    
+    /**
+     * Configure Tile classes for rendering
+     * 
+     * This function is called before render is called on a master grid.
+     * It isn't necessary to add a stylize step to Your grid since in many cases
+     * this kind of functionality can also be provided by reactively resolving 
+     * style information of tiles when needed or by eagerly configuring it in 
+     * the grid's layout phase. Since those two alternatives might come with 
+     * performance penalties in large sets this is just a chance for 
+     * optimizations.
+     * 
+     * @return void
+     */
+    public function stylize();
 }

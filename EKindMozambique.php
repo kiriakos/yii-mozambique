@@ -21,6 +21,8 @@ final class EKindMozambique extends CApplicationComponent {
     public $sorter = "ext.kindMozambique.components.EKindMozambiquePropertyBasedSorter";
     public $paginationScraper = "ext.kindMozambique.components.EKindMozambiquePaginationScraper";
     public $pagination = "ext.kindMozambique.components.EKindMozambiqueSimplePagination";
+    public $uuidGen = "ext.kindMozambique.components.EKindUuidGen";
+    public $gridRenderer = "ext.kindMozambique.components.EKindGridRenderer";
     
     ////////////////////////////////////////////////////////////////////////////
     // Non Components
@@ -45,7 +47,6 @@ final class EKindMozambique extends CApplicationComponent {
      */
     private $finder;
     
-    
     public function init() {
         parent::init();
         
@@ -57,6 +58,7 @@ final class EKindMozambique extends CApplicationComponent {
         $class = array_pop(explode(".", $this->finderAlias));
         
         $this->finder = new $class;
+        $this->uuidGen = Yii::createComponent($this->uuidGen);
         
         if(! $this->finder instanceof \IMozambiqueFinder){
             throw new \CException("Mozambique requires the configuration"
@@ -223,5 +225,13 @@ final class EKindMozambique extends CApplicationComponent {
      */
     public function getPagination(){
         return Yii::createComponent($this->pagination);
+    }
+    
+    public function generateUuid(){
+        return $this->uuidGen->v4();
+    }
+    
+    public function generateGridRenderer(\IMozambiqueGrid $grid){
+        return $this->instantiateNonComponent($this->gridRenderer, array($grid));
     }
 }

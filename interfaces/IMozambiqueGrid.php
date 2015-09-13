@@ -36,7 +36,14 @@ interface IMozambiqueGrid extends IMozambiqueTile{
      * @param \IMozambiqueTile $tile
      */
     public function removeTile(\IMozambiqueTile $tile);
-    
+
+    /**
+     * Remove the passed tile from the grid
+     * 
+     * @param \IMozambiqueTile[] $tiles
+     */
+    public function removeTiles($tiles);
+
     /**
      * Get a 2D representation of the grid.
      * 
@@ -45,13 +52,7 @@ interface IMozambiqueGrid extends IMozambiqueTile{
      * @return \IMozambiqueTile[][]
      */
     public function get2d();
-    
-    /**
-     * 
-     * @return \IMozambiqueTile[]
-     */
-    public function getItems($rect = false);
-    
+        
     /**
      * Configure Tile classes for rendering
      * 
@@ -66,4 +67,21 @@ interface IMozambiqueGrid extends IMozambiqueTile{
      * @return void
      */
     public function stylize();
+    
+    /**
+     * Whether this grid is a main grid
+     * 
+     * @return boolean
+     */
+    public function isMainGrid();
+    
+    /**
+     * Demarcate the grid as either a main Grid or a Subgrid
+     * 
+     * Main grids are the root elements of a Mozambique Layout. They are the 
+     * first grid a designer has created.
+     * 
+     * @param boolean $boolean
+     */
+    public function setMainGrid($boolean);
 }

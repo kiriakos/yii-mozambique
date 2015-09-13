@@ -14,17 +14,17 @@ class EKindMozambiqueGridStylizer {
      * 
      * @var \IMozambiqueTile[][]
      */
-    private $grid;
+    private $grid2D;
     
     /**
      *  The grid to be rendered
      * @var \IMozambiqueGrid
      */
-    private $gridObject;
+    private $grid;
     
     public function __construct(\IMozambiqueGrid $grid) {
-        $this->grid = &$grid->get2d();
-        $this->gridObject = $grid;
+        $this->grid2D = &$grid->get2d();
+        $this->grid = $grid;
     }
     
     
@@ -41,16 +41,16 @@ class EKindMozambiqueGridStylizer {
      */
     public function stylize(){
         
-        $width = $this->gridObject->getWidth();
+        $width = $this->grid->getWidth();
 
-        foreach(array_keys($this->grid) as $rowId){            
-            for($tile=0; $tile<$width-1; $tile++){   
+        foreach(array_keys($this->grid2D) as $rowId){            
+            for($tileId=0; $tileId<$width-1; $tileId++){   
                 
-                $nextTile = $this->grid[$rowId][$tile+1];
-                $currentTile = $this->grid[$rowId][$tile];
+                $nextTile = $this->grid2D[$rowId][$tileId+1];
+                $currentTile = $this->grid2D[$rowId][$tileId];
                 
                 if($nextTile && ($currentTile !== $nextTile )){
-                    $this->ensureTileMarkupable($rowId, $tile);
+                    $this->ensureTileMarkupable($rowId, $tileId);
                 }
             }
         }
@@ -59,35 +59,36 @@ class EKindMozambiqueGridStylizer {
     /**
      * Ensures that the tile specified by the arguments is renderable
      * 
+     * If the tile undert $rowId, $tile  is a gap (NULL, FALSE or an instance of 
+     * EKindMozambiqueGap) a dummy item is generated.
+     * 
      * In case the next tile... ToDo
      * 
      * @param int $rowId
-     * @param int $tile
+     * @param int $tileId
      */
-    private function ensureTileMarkupable($rowId, $tile){
-        $nextTile = $this->grid[$rowId][$tile+1];
-        $currentTile = $this->grid[$rowId][$tile];
+    private function ensureTileMarkupable($rowId, $tileId){
+        $obstacleTile = $this->grid2D[$rowId][$tileId+1];
+        $mergeTile = $this->grid2D[$rowId][$tileId];
                 
-        if(!$currentTile){
-            $merge = new KindFrontPageItem (($rowId+1)*($tile+1), Image::model(), 1, 1);//Art 1x1 @ 3,2
-            $merge->setGridPosition(array($tile, $rowId));
-        }else{
-            $merge = $currentTile; //Art 1x1 @ 3,2
+        if( !$mergeTile || $mergeTile instanceof EKindMozambiqueGap){
+            $placeholder = Image::model()->latest->visible->find();
+            $mergeTile = Yii::app()->mozambique->generateTile($placeholder, 1,1);
+            $mergeTile->setGridPosition(array($tileId, $rowId));
         }
         
-        $mergePosition = $merge->getGridPosition(); // 3,2
+        $mergePosition = $mergeTile->getGridPosition(); // 3,2
         $mergeRow = $mergePosition[1]; //2
 
-        $obstacle = $nextTile; //Gal 1x2 @ 4,2
-        $obstaclePosition = $obstacle->getGridPosition();// 4,2
+        $obstaclePosition = $obstacleTile->getGridPosition();// 4,2
         $obstacleRow = $obstaclePosition[1];// 2
 
         $rowDiff = $mergeRow - $obstacleRow; //goes neg or zero  //2-2=0
 
-        $oAllowHeight =$merge->getHeight() + $rowDiff;//1+0=1
+        $oAllowHeight =$mergeTile->getHeight() + $rowDiff;//1+0=1
         
-        if($obstacle->getHeight() > $oAllowHeight){//2>1 -> true
-            $this->insertMergeTile($merge, $obstacle, $tile);
+        if($obstacleTile->getHeight() > $oAllowHeight){//2>1 -> true
+            $this->insertMergeTile($mergeTile, $obstacleTile, $tileId);
         }
     }
     
@@ -125,9 +126,32 @@ class EKindMozambiqueGridStylizer {
         $height= $rect[3]-$rect[1]+1; // 3-2+1=2
 
         $items = $this->getItems($rect); //0,2,3,3
-        $this->removeItemsFromGrid($items);
+        $this->grid->removeTiles($items);
         $subg = Yii::app()->mozambique->generateGrid($width, $height);
                 // new KindFrontPageGrid($width, $height);
+        $subg->setIsSubGrid(true);
+
+        foreach ($items as $item){
+            $subg->addItem($item); //ToDo: this methodology of merging seems flawed
+        }
+
+        $this->setItem(array($rect[0],$rect[1]), $subg);
+
+        return $subg;
+    }
+    
+    /**
+     *  Create a subgrid to merge small tile cluster into bigger ones
+     *
+     * @param integer[] $rect       (left,top,right,bottom)
+     * @return null
+     */
+    private function mergeRect(\EKindMozambiqueRect $rect){
+
+        $items = $this->getItemsRect($rect);
+        $this->grid->removeTiles($items);
+        $subg = Yii::app()->mozambique->generateGrid($rect->getWidth(), 
+                $rect->getHeight());
         $subg->setIsSubGrid(true);
 
         foreach ($items as $item){
@@ -146,52 +170,30 @@ class EKindMozambiqueGridStylizer {
      * (0.0, 0.1, 0.2, 1.0, 1.1, 1.2) items that consume multiple positions are
      * returned only once
      *
-     * @param integer[] $rect       (left,top,right,bottom)
+     * @param EKindMozambiqueRect $rect
      * @return \IMozambiqueTile[]
      */
-    public function getItems($rect=false) {
-        if($rect){
-            $left   = $rect[0];
-            $top    = $rect[1];
-            $right  = $rect[2];
-            $bottom = $rect[3];
-        }else{
-            $left   = 0;
-            $top    = 0;
-            $right  = $this->width-1;
-            $bottom = $this->height-1;
-        }
-
+    private function getItemsRect(EKindMozambiqueRect $rect) {
+        
         $items = array();
 
-        for($row=$top;$row<=$bottom;$row++){
-            if($row == $this->height)//precaution for an ill computed merge grid
-                    return $items;
-            for($tile=$left;$tile<=$right;$tile++){ //added check for False condition on if
-                if($this->grid[$row][$tile] && !in_array($this->grid[$row][$tile], $items, true))
-                        $items[]=$this->grid[$row][$tile];
+        for($row=$rect->getTop(); $row<=$rect->getBottom(); $row++){
+            
+            //precaution for an ill computed merge grid
+            if($row == $this->grid->getHeight()){
+                return $items;
+            }
+                
+            for($tile=$rect->getLeft(); $tile<=$rect->getRight(); $tile++){ 
+                
+                //added check for False condition on if
+                if($this->grid2D[$row][$tile] 
+                        && !in_array($this->grid2D[$row][$tile], $items, true)){
+                    $items[]=$this->grid2D[$row][$tile];
+                }
             }
         }
 
         return $items;
-    }
-    
-    /**
-     *  Sets the tiles on which $items are found to false
-     *
-     * @param \IMozambiqueTile[] $items
-     */
-    private function removeItemsFromGrid($items){
-        
-        foreach ($items as $item)
-            foreach($this->grid as $r=>$row){
-                foreach($row as $t=>$tile){
-                    if($tile && $tile === $item){
-                        $this->setTile (array($t,$r));
-                    }
-                }
-            }
-        }
-        
     }
 }

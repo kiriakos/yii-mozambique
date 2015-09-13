@@ -18,7 +18,7 @@ interface IMozambiqueRenderable {
      * @param integer $height
      * @param string[] $classes
      */
-    function renderTile($width=1,$height=1, $classes=array());
+    function renderTile($width=1,$height=1, $classes=array(), $return = FALSE);
     
     /**
      * Get an HTML displayable Title 

@@ -39,13 +39,7 @@ implements IMozambiqueTile {
         'Gallery' => 12,
         'Project' => 9,
     );
-    
-    /**
-     *  Assigned by KindFrontPageDesigner on construct
-     * @var integer
-     */
-    private $id = NULL;
-    
+        
     /**
      *  An instance of an object that can be displayed on the front page
      * @var IMozambiqueRenderable
@@ -56,7 +50,6 @@ implements IMozambiqueTile {
             $height= null){
         
         $this->record = $record;
-        
         
         if($width && $width <= self::MAX_WIDTH){
             $effectiveWidth = $width;
@@ -101,17 +94,18 @@ implements IMozambiqueTile {
     }
 
     public function getId() {
-        return $this->id;
+        return get_class($this->record). "-". $this->record->id;
     }
 
 
     public function render($return = TRUE) {
-        return $this->record->renderTile($return);
+        return $this->record->renderTile($this->getWidth(), $this->getHeight(), 
+                $this->getClasses(), $return);
     }
 
     public function heighten() {
         if($this->getHeight() < self::MAX_HEIGHT){
-            $this->heighten();
+            parent::heighten();
         }
         else{
             $msg = "The height of ". $this->record->getUniqueTitle(). " exceded"

@@ -83,9 +83,14 @@ interface IMozambiqueTile {
      * Set the grid position of the tile's Left Top corner
      * 
      * @param \IMozambiquePoint $position
+     * @return void
      */
     public function setGridPosition(\IMozambiquePoint $position);
     
+    /**
+     * Facility to unset the position. (When a tile is removed from a grid)
+     */
+    public function unsetGridPosition();
     
     /**
      * @return string[]

@@ -31,6 +31,7 @@ implements IMozambiqueGridDesigner{
     }
 
     public function layout() {
+        
         foreach($this->tiles as $tile)
         {
             $success = $this->grid->addTile($tile);
@@ -38,11 +39,11 @@ implements IMozambiqueGridDesigner{
             // addItem returns false if grid is full and can't be modified 
             // anymore. Should this happen the grid population should finish
             // and proceed with the required items.
-            if($success==FALSE && $this->grid->heighten() == FALSE){
+            if($success == FALSE && $this->grid->heighten() == FALSE){
                 break;
             }
         }
-        
+
         $this->grid->fillGaps();
         $this->grid->stylize();
     }

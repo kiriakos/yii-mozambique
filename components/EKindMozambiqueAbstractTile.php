@@ -14,11 +14,15 @@
  */
 abstract class EKindMozambiqueAbstractTile
 implements IMozambiqueTile{
-    
-    public function __construct($width = 1, $height = 1) {
-        $this->width = $width;
-        $this->height = $height;
-    }
+        
+    /**
+     * A naive hash set. The structure is key=>value wehere value is always null
+     * 
+     * Sadly PHP does not support a Hash set for native types like strigns.
+     * 
+     * @var array
+     */
+    private $classes = array();
     
     /**
      *  The height (in tiles) the object will be rendered in
@@ -37,7 +41,12 @@ implements IMozambiqueTile{
      * @var \IMozambiquePoint
      */
     private $gridPosition;
-    
+
+        
+    public function __construct($width = 1, $height = 1) {
+        $this->width = $width;
+        $this->height = $height;
+    }
     
     public function canHeighten() {
         return TRUE;
@@ -111,14 +120,9 @@ implements IMozambiqueTile{
         $this->gridPosition = $position;
     }
     
-    /**
-     * A naive hash set. The structure is key=>value wehere value is always null
-     * 
-     * Sadly PHP does not support a Hash set for native types like strigns.
-     * 
-     * @var array
-     */
-    private $classes = array();
+    public function unsetGridPosition() {
+        $this->gridPosition = NULL;
+    }
     
     public function addClass($class) {
         

@@ -17,6 +17,8 @@ implements IMozambiqueGrid{
      */
     private $grid;
     
+    private $isMainGrid = TRUE;
+    
     private $renderer;
     private $stylizer;
     
@@ -26,10 +28,9 @@ implements IMozambiqueGrid{
         
         parent::__construct($width, $height);
         
-        $row = array_fill(0, $width, NULL);
-        $grid = array_fill(0, $height, NULL);
+        $grid = array_fill(0, $height, FALSE);
         for($i = 0; $i < $height; $i++){
-            $grid[$i] = array_values($row);
+            $grid[$i] = array_fill(0, $width, FALSE);
         }
         
         $this->grid = $grid;
@@ -60,11 +61,11 @@ implements IMozambiqueGrid{
         $gaps = array();
         for ($y = 0; $y < $this->getHeight(); $y++) {
             for ($x = 0; $x < $this->getWidth(); $x++) {
-                $point = new EKindMozambiquePoint($x, $y);
-                $tile = $this->getTile($point);
+                $gap = Yii::app()->mozambique->generateGap($x, $y);
+                $tile = $this->getTile($gap);
                 
-                if($tile === FALSE){
-                    $gaps[] = $point;
+                if($tile === FALSE || $tile instanceof EKindMozambiqueGap){
+                    $gaps[] = $gap;
                 }
             }
         }
@@ -119,7 +120,7 @@ implements IMozambiqueGrid{
     }
     
     public function heighten() {
-        $row = array_fill(0, $this->getWidth(), NULL);
+        $row = array_fill(0, $this->getWidth(), FALSE);
         $this->grid[] = $row;
         
         parent::heighten();
@@ -137,13 +138,38 @@ implements IMozambiqueGrid{
         $position = $this->getSpace($dims);
         
         if ($position){
-            return $this->setItem($position, $tile);
+            $this->assignTile($tile, $position);
+            return TRUE;
         }
         
         return FALSE;
     }
     
-    
+    /**
+     * Sets the values of the affected grid cels to be the tile.
+     * 
+     * @param \IMozambiqueTile $tile
+     * @param \EKindMozambiquePoint $position
+     * @return void
+     */
+    private function assignTile(\IMozambiqueTile $tile, 
+            \EKindMozambiquePoint $position){
+        
+        $rowStart = $position->getY();
+        $rowEnd = $rowStart + $tile->getHeight(); //exclusive
+        
+        $colStart = $position->getX();
+        $colEnd = $colStart + $tile->getWidth(); //exclusive
+        
+        for($row=$rowStart; $row<$rowEnd; $row++){
+            for($col=$colStart; $col<$colEnd; $col++){
+                $this->grid[$row][$col] = $tile;
+            }
+        }
+        
+        $tile->setGridPosition($position);
+    }
+        
     /**
      * Get a free patch in the grid based on passed dimensions.
      * 
@@ -152,14 +178,14 @@ implements IMozambiqueGrid{
      * @param integer[] $dims
      * @return \IMozambiquePoint
      */
-    private function getSpace($dims)
-    {
+    private function getSpace($dims){
+        
         foreach ($this->grid as $rowId => $row){
-            foreach ($row as $tileId => $tile){
-                if ($this->tileIsEmpty($tile) 
+            foreach (array_keys($row) as $tileId){
+                if ($this->tileIsEmpty($this->grid[$rowId][$tileId])
                         && $this->tilesAreEmpty(array($tileId, $rowId), $dims)){
                     return Yii::app()->mozambique->generatePoint(
-                            $tileId,$rowId);
+                            $tileId, $rowId);
                 }
             }
         }
@@ -173,45 +199,71 @@ implements IMozambiqueGrid{
     
     /**
      *
-     * @param integer[] $position hxw
-     * @param integer[] $dims   wxh
+     * @param integer[] $position   XxY Col*Row
+     * @param integer[] $dims       WxH
      * @return boolean
      */
     private function tilesAreEmpty($position,$dims)
     {
-        //for each row of the grid
-        for($i=$position[1]; $i<$position[1]+$dims[1]; $i++){
-            //for each tile in row
-            for($j=$position[0]; $j<$position[0]+$dims[0]; $j++){
+        $colStart = $position[0];
+        $rowStart = $position[1];
+        
+        $colEnd = $colStart + $dims[0]; // Exclusive
+        $rowEnd = $rowStart + $dims[1]; // Exclusive
                 
-                if ( $i > $this->height-1 || $j > $this->width-1 || 
-                        !$this->tileIsEmpty($this->grid[$i][$j])){
+        if($colEnd > $this->getWidth()
+                || $rowEnd > $this->getHeight()){
+            return FALSE;
+        }
+        
+        for($row=$rowStart; $row<$rowEnd; $row++){
+            for($col=$colStart; $col<$colEnd; $col++){
+                if (!$this->tileIsEmpty($this->grid[$row][$col])){
                     return FALSE;
                 }
             }
         }
-
+        
         return TRUE;
     }
-
     
-    public function removeTile(\IMozambiqueTile $tile){
+    /**
+     * 
+     * @param \IMozambiqueTile[] $tiles
+     */
+    public function removeTiles($tiles){
         foreach($this->grid as $r=>$row){
-            foreach($row as $t=>$content){
-                if($content && $tile === $content){
-                    $this->
-                    $this->setTile(array($t,$r));
+            foreach($row as $t=>$tile){
+                if(in_array($tile, $tiles)){
+                    $this->grid[$r][$t] = FALSE;
                 }
             }
         }
+        
+        foreach($tiles as $tile){
+            $tile->unsetGridPosition();
+        }
+    }
+    
+    public function removeTile(\IMozambiqueTile $tile){
+        
+        foreach($this->grid as $r=>$row){
+            foreach($row as $t=>$content){
+                if($content && $tile === $content){
+                    $this->grid[$r][$t] = FALSE;
+                }
+            }
+        }
+        
+        $tile->unsetGridPosition();
     }
 
     public function fillGaps() {
         $gapPatcher = Yii::app()->mozambique->generateGapPatcher();
         $gaps = $this->getGaps();
         while($gaps){
-            if(!$gapPatcher->fillGap($gap, $this)){
-                $gapPatcher->forceFillGapp($gap, $this);
+            if(!$gapPatcher->fillGap($gaps[0], $this)){
+                $gapPatcher->forceFillGapp($gap[0], $this);
             }
             
             $gaps = $this->getGaps();
@@ -227,48 +279,42 @@ implements IMozambiqueGrid{
     }
     
     /**
-     * Get the items defined by the rect $left, $top, $right, $bottom
-     *
-     * the dims are given inclusive, getItems(0,0,1,2) will return max 6 items
-     * (0.0, 0.1, 0.2, 1.0, 1.1, 1.2) items that consume multiple positions are
-     * returned only once
-     *
-     * @param integer[] $rect       (left,top,right,bottom)
-     * @return IMozambiqueTile[]
+     * Produces a visual representation of the grid;
+     * 
+     * @return String[][]
      */
-    public function getItems($rect=false) {
-        if($rect){
-            $left   = $rect[0];
-            $top    = $rect[1];
-            $right  = $rect[2];
-            $bottom = $rect[3];
-        }else{
-            $left   = 0;
-            $top    = 0;
-            $right  = $this->width-1;
-            $bottom = $this->height-1;
-        }
-
-        $items = array();
-
-        for($row=$top;$row<=$bottom;$row++){
-            //precaution for an ill computed merge grid
-            if($row == $this->height){
-                return $items;
-            }
-            for($tile=$left;$tile<=$right;$tile++){ 
-                //added check for False condition on if
-                if($this->grid[$row][$tile] 
-                        && !in_array($this->grid[$row][$tile], $items, true)){
-                    $items[]=$this->grid[$row][$tile];
+    public function getDebugGrid(){
+        $grid = array();
+        
+        foreach($this->grid as $row){
+            $rowa = array();
+            
+            foreach($row as $tile){
+                
+                if($tile instanceof IMozambiqueTile){
+                    $rowa[] = $tile->getId();
                 }
+                else{
+                    $rowa[] = $tile;
+                }
+                    
             }
+            $grid[] = $rowa;
         }
-
-        return $items;
+        
+        return $grid;
     }
     
     public function stylize(){
         $this->stylizer->stylize();
     }
+
+    public function isMainGrid() {
+        return $this->isMainGrid;
+    }
+
+    public function setMainGrid($boolean) {
+        $this->isMainGrid = $boolean;
+    }
+
 }

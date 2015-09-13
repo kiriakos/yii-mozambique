@@ -33,8 +33,9 @@ final class EKindMozambique extends CApplicationComponent {
     public $gapAlias = "ext.kindMozambique.components.EKindMozambiqueGap";
     public $gapPatcherAlias = "ext.kindMozambique.components.EKindMozambiqueGapPatcher";
     public $tileCollectionAlias = "ext.kindMozambique.components.EKindMozambiqueBaseTileCollection";
-    public $gridRenderer = "ext.kindMozambique.components.EKindMozambiqueGridRenderer";
-    public $gridStylizer = "ext.kindMozambique.components.EKindMozambiqueGridStylizer";
+    public $gridRendererAlias = "ext.kindMozambique.components.EKindMozambiqueGridRenderer";
+    public $gridStylizerAlias = "ext.kindMozambique.components.EKindMozambiqueGridStylizer";
+    public $tileAlias = "ext.kindMozambique.components.EKindMozambiqueActiveRecordTile";
     
     ////////////////////////////////////////////////////////////////////////////
     // The CSS Delivered with Mozambique provides for base grids up to width 5
@@ -198,7 +199,8 @@ final class EKindMozambique extends CApplicationComponent {
                     . " IMozambiqueTile instances!");
         }
         
-        return $this->instantiateNonComponent($this->tileCollectionAlias, array($list,$pagination));
+        return $this->instantiateNonComponent($this->tileCollectionAlias, 
+                array($list,$pagination));
     }
     
     /**
@@ -233,10 +235,27 @@ final class EKindMozambique extends CApplicationComponent {
     }
     
     public function generateGridRenderer(\IMozambiqueGrid $grid){
-        return $this->instantiateNonComponent($this->gridRenderer, array($grid));
+        return $this->instantiateNonComponent($this->gridRendererAlias, 
+                array($grid));
     }
     
     public function generateGridStylizer(\IMozambiqueGrid $grid){
-        return $this->instantiateNonComponent($this->gridStylizer, array($grid));
+        return $this->instantiateNonComponent($this->gridStylizerAlias, 
+                array($grid));
+    }
+    
+    /**
+     * Generate an instance of the default configured Tile.
+     * 
+     * @param \IMozambiqueRenderable $renderable
+     * @param integer $width
+     * @param integer $height
+     * @return IMozambiqueTile
+     */
+    public function generateTile(\IMozambiqueRenderable $renderable, 
+            $width = null, $height= null){
+        
+        return $this->instantiateNonComponent($this->tileAlias, 
+                array($renderable, $width, $height));
     }
 }

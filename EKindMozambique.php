@@ -49,8 +49,16 @@ final class EKindMozambique extends CApplicationComponent {
      */
     private $finder;
     
+    const YII_LOGGING_BASE_CATEGORY = "kind.mozambique";
+    
     public function init() {
         parent::init();
+        
+        Yii::trace("Initializing KIND Mozambique", 
+                self::YII_LOGGING_BASE_CATEGORY);
+        
+        Yii::log("Initializing KIND Mozambique", 
+                self::YII_LOGGING_BASE_CATEGORY);
         
         Yii::import("ext.kindMozambique.interfaces.*");
         Yii::import("ext.kindMozambique.components.*");

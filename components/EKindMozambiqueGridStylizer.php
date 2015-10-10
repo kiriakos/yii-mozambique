@@ -1,10 +1,16 @@
 <?php
 /**
+ * WARNING: Incomplete, does not work. use EKindMozambiqueAbsoluteGridStylizer!
+ * 
  * Takes care of EKindMozambiqueGrid::stylize()
+ * 
+ * Mozambique Tiles are floated to the left in CSS. This Stylizer makes sure 
+ * that all tiles can float where they belong to.
  *
  * @author kiriakos
  */
-class EKindMozambiqueGridStylizer {
+class EKindMozambiqueGridStylizer 
+implements IMozambiqueGridStylizer{
     
     /**
      * Reference to the Grid's 2D representation
@@ -22,7 +28,7 @@ class EKindMozambiqueGridStylizer {
      */
     private $grid;
     
-    public function __construct(\IMozambiqueGrid $grid) {
+    private function setGrid(\IMozambiqueGrid $grid) {
         $this->grid2D = &$grid->get2d();
         $this->grid = $grid;
     }
@@ -36,71 +42,81 @@ class EKindMozambiqueGridStylizer {
      * in some other position. In this case subgrids are created to remedy the
      * situation.
      * 
-     * This implementation traverses the Grid and calls a box model enforcing
-     * method in on every Tile boundary of each row.
+     * This implementation traverses the Grid in reverse (bottom right to top 
+     * left) and spawns subgrids every time it encounters a right tile with a
+     * bottom value lower than its left counterpart.
+     * 
+     * @return void
      */
-    public function stylize(){
+    public function stylize(\IMozambiqueGrid $grid){
+        $this->setGrid($grid);
         
         $width = $this->grid->getWidth();
+        $height = $this->grid->getHeight();
+        
+        //This is a naive Inspection, maybe there is a better algo
+        for($rowId=$height-1; $rowId>=0; $rowId--){
+            for($tileId=$width-1; $tileId>0; $tileId--){   
 
-        foreach(array_keys($this->grid2D) as $rowId){            
-            for($tileId=0; $tileId<$width-1; $tileId++){   
+                $this->patchMissingTiles($rowId, $tileId);
                 
-                $nextTile = $this->grid2D[$rowId][$tileId+1];
-                $currentTile = $this->grid2D[$rowId][$tileId];
+                $left = $this->grid2D[$rowId][$tileId-1];
+                $right = $this->grid2D[$rowId][$tileId];
                 
-                if($nextTile && ($currentTile !== $nextTile )){
-                    $this->ensureTileMarkupable($rowId, $tileId);
+                if($right !== $left 
+                        && $right->getBottom() > $left->getBottom()){
+                    $this->insertMergeTile($leftTile, $rightTile);
                 }
             }
         }
     }
     
     /**
-     * Ensures that the tile specified by the arguments is renderable
+     * Makes sure that the tiles around the seam are Mozambique Tiles
      * 
-     * If the tile undert $rowId, $tile  is a gap (NULL, FALSE or an instance of 
-     * EKindMozambiqueGap) a dummy item is generated.
+     * A seam is the edge between two tiles. Seams are zero based dimenstions.
+     * Between tile two and three of the same grid row the seam takes the value
+     * of Tile3->getGridPosition()->getX().
      * 
-     * In case the next tile... ToDo
-     * 
-     * @param int $rowId
-     * @param int $tileId
+     * @param integer $row
+     * @param integer $seam
      */
-    private function ensureTileMarkupable($rowId, $tileId){
-        $obstacleTile = $this->grid2D[$rowId][$tileId+1];
-        $mergeTile = $this->grid2D[$rowId][$tileId];
-                
-        if( !$mergeTile || $mergeTile instanceof EKindMozambiqueGap){
+    private function patchMissingTiles($row, $seam){
+        $left = $this->grid2D[$row][$seam-1];
+        $right = $this->grid2D[$row][$seam];
+
+        if( !$left || $left instanceof EKindMozambiqueGap){
             $placeholder = Image::model()->latest->visible->find();
-            $mergeTile = Yii::app()->mozambique->generateTile($placeholder, 1,1);
-            $mergeTile->setGridPosition(array($tileId, $rowId));
+            $left = Yii::app()->mozambique->generateTile($placeholder, 1,1);
+            $left->setGridPosition(array($seam-1, $row));
+            $this->grid2D[$row][$seam-1] = $left;
         }
-        
-        $mergePosition = $mergeTile->getGridPosition(); // 3,2
-        $mergeRow = $mergePosition[1]; //2
 
-        $obstaclePosition = $obstacleTile->getGridPosition();// 4,2
-        $obstacleRow = $obstaclePosition[1];// 2
-
-        $rowDiff = $mergeRow - $obstacleRow; //goes neg or zero  //2-2=0
-
-        $oAllowHeight =$mergeTile->getHeight() + $rowDiff;//1+0=1
-        
-        if($obstacleTile->getHeight() > $oAllowHeight){//2>1 -> true
-            $this->insertMergeTile($mergeTile, $obstacleTile, $tileId);
+        if( !$right || $right instanceof EKindMozambiqueGap){
+            $placeholder = Image::model()->latest->visible->find();
+            $right = Yii::app()->mozambique->generateTile($placeholder, 1,1);
+            $right->setGridPosition(array($seam, $row));
+            $this->grid2D[$row][$seam] = $right;
         }
     }
-    
-    private function insertMergeTile($merge, $obstacle, $tile){
-        $mergePosition = $merge->getGridPosition(); // 3,2
+        
+    /**
+     * Spawns a box model enabling subgrid.
+     * 
+     * @param integer $row
+     * @param integer $seam
+     */
+    private function insertMergeTile($row,$seam){
+        $gridHeight=1;
+        
+        $mergePosition = $left->getGridPosition(); // 3,2
         $mergeRow = $mergePosition[1]; //2
         
-        $obstaclePosition = $obstacle->getGridPosition();// 4,2
+        $obstaclePosition = $right->getGridPosition();// 4,2
         $obstacleRow = $obstaclePosition[1];// 2
 
         $mergeFromRow = $mergeRow; //2
-        $mergeToRow = $obstacleRow + $obstacle->getHeight() -1; //-1 inclussive rows //2+2-1=3
+        $mergeToRow = $obstacleRow + $right->getHeight() -1; //-1 inclussive rows //2+2-1=3
 
         $subGrid = $this->merge( array(
             0,      //$left

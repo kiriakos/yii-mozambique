@@ -78,6 +78,34 @@ interface IMozambiqueTile {
      * @returns \IMozambiquePoint
      */
     public function getGridPosition();
+    
+    /**
+     * Get the seam coordinate relative to the grid position.
+     *  
+     * @return integer
+     */
+    public function getTop();
+    
+    /**
+     * Get the seam coordinate relative to the grid position.
+     *  
+     * @return integer
+     */
+    public function getBottom();
+    
+    /**
+     * Get the seam coordinate relative to the grid position.
+     *  
+     * @return integer
+     */
+    public function getRight();
+    
+    /**
+     * Get the seam coordinate relative to the grid position.
+     *  
+     * @return integer
+     */
+    public function getLeft();
 
     /**
      * Set the grid position of the tile's Left Top corner

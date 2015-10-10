@@ -159,4 +159,41 @@ implements IMozambiqueTile{
         
         $this->classes = array_flip($classes);        
     }
+    
+    /**
+     * Get the seam coordinate relative to the grid position.
+     *  
+     * @return integer
+     */
+    public function getTop(){
+        return $this->gridPosition->getY();
+    }
+    
+    /**
+     * Get the seam coordinate relative to the grid position.
+     *  
+     * @return integer
+     */
+    public function getBottom(){
+        return $this->gridPosition->getY() + $this->height;
+    }
+    
+    /**
+     * Get the seam coordinate relative to the grid position.
+     *  
+     * @return integer
+     */
+    public function getRight(){
+        return $this->gridPosition->getX() + $this->width;
+    }
+    
+    /**
+     * Get the seam coordinate relative to the grid position.
+     *  
+     * @return integer
+     */
+    public function getLeft(){
+        return $this->gridPosition->getX();
+    }
+
 }

@@ -18,7 +18,7 @@ implements IMozambiqueTile{
     /**
      * A naive hash set. The structure is key=>value wehere value is always null
      * 
-     * Sadly PHP does not support a Hash set for native types like strigns.
+     * Sadly PHP does not support a Hash set for native types like strings.
      * 
      * @var array
      */
@@ -45,7 +45,7 @@ implements IMozambiqueTile{
         
     public function __construct($width = 1, $height = 1) {
         $this->width = $width;
-        $this->height = $height;
+        $this->height = $height;       
     }
     
     public function canHeighten() {

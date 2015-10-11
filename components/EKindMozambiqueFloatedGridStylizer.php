@@ -2,14 +2,16 @@
 /**
  * WARNING: Incomplete, does not work. use EKindMozambiqueAbsoluteGridStylizer!
  * 
- * Takes care of EKindMozambiqueGrid::stylize()
+ * Modifies a grid that is aranged by floating the tiles so that it can 
+ * correctly be displayed
  * 
  * Mozambique Tiles are floated to the left in CSS. This Stylizer makes sure 
  * that all tiles can float where they belong to.
  *
  * @author kiriakos
  */
-class EKindMozambiqueGridStylizer 
+class EKindMozambiqueFloatedGridStylizer 
+extends CComponent
 implements IMozambiqueGridStylizer{
     
     /**

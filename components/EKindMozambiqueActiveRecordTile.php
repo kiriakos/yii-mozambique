@@ -51,6 +51,7 @@ implements IMozambiqueTile {
         
         $this->record = $record;
         $this->addClass("tile");
+        $this->addClass(strtolower(get_class($record)));
         
         if($width && $width <= self::MAX_WIDTH){
             $effectiveWidth = $width;

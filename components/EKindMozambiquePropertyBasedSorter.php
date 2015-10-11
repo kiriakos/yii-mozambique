@@ -14,12 +14,23 @@ extends CComponent
 implements IMozambiqueSorter{
     
     /**
+     * Sort in descending values
+     */
+    const ORDER_DESC = 1;
+    
+    /**
+     * Sort in ascending values
+     */
+    const ORDER_ASC = 2;
+    
+    
+    /**
      * The property to call.
      *
      * @var string
      */
     public $property = "date_u";
-    
+    public $order = self::ORDER_DESC;
     
     /**
      * An array of calls that will happen on a and b before properties are compared
@@ -30,6 +41,8 @@ implements IMozambiqueSorter{
     
     /**
      * The sorting function
+     * 
+     * Sort direction is being governed by the $order property.
      * 
      * @param object $a
      * @param object $b
@@ -46,8 +59,16 @@ implements IMozambiqueSorter{
         if($a->$prop == $b->$prop){
             return 0;
         }
-        else{
+        elseif($this->order === self::ORDER_ASC){
             return $a->$prop > $b->$prop ? 1 : -1;
+        }
+        elseif($this->order === self::ORDER_DESC){
+            return $a->$prop < $b->$prop ? 1 : -1;
+        }
+        else{
+            throw new BadMethodCallException("The order attribute of "
+                    . get_class(). " must be a value from it's ORDER_XXX"
+                    . " constants!");
         }
     }
 }

@@ -22,6 +22,7 @@ final class EKindMozambique extends CApplicationComponent {
     public $paginationScraper = "ext.kindMozambique.components.EKindMozambiquePaginationScraper";
     public $pagination = "ext.kindMozambique.components.EKindMozambiqueSimplePagination";
     public $uuidGen = "ext.kindMozambique.components.EKindUuidGen";
+    public $gridStylizerAlias = "ext.kindMozambique.components.EKindMozambiqueAbsoluteGridStylizer";
     
     ////////////////////////////////////////////////////////////////////////////
     // Non Components
@@ -34,7 +35,6 @@ final class EKindMozambique extends CApplicationComponent {
     public $gapPatcherAlias = "ext.kindMozambique.components.EKindMozambiqueGapPatcher";
     public $tileCollectionAlias = "ext.kindMozambique.components.EKindMozambiqueBaseTileCollection";
     public $gridRendererAlias = "ext.kindMozambique.components.EKindMozambiqueGridRenderer";
-    public $gridStylizerAlias = "ext.kindMozambique.components.EKindMozambiqueGridStylizer";
     public $tileAlias = "ext.kindMozambique.components.EKindMozambiqueActiveRecordTile";
     
     ////////////////////////////////////////////////////////////////////////////
@@ -230,6 +230,10 @@ final class EKindMozambique extends CApplicationComponent {
         return Yii::createComponent($this->paginationScraper);
     }
 
+    public function getGridStylizer(){
+        return Yii::createComponent($this->gridStylizerAlias);
+    }
+
     /**
      * 
      * @return IMozambiquePagination
@@ -246,12 +250,7 @@ final class EKindMozambique extends CApplicationComponent {
         return $this->instantiateNonComponent($this->gridRendererAlias, 
                 array($grid));
     }
-    
-    public function generateGridStylizer(\IMozambiqueGrid $grid){
-        return $this->instantiateNonComponent($this->gridStylizerAlias, 
-                array($grid));
-    }
-    
+        
     /**
      * Generate an instance of the default configured Tile.
      * 

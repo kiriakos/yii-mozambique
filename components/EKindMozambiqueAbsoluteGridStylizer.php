@@ -8,10 +8,11 @@
  * @author kiriakos
  */
 class EKindMozambiqueAbsoluteGridStylizer 
+extends CComponent
 implements IMozambiqueGridStylizer{
     
     public function stylize(\IMozambiqueGrid $grid) {
-        
+        //Do nothing! :-P
     }
 
 }

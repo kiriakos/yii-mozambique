@@ -37,6 +37,9 @@ implements IMozambiqueGrid{
         $this->id = Yii::app()->mozambique->generateUuid();
         $this->renderer = Yii::app()->mozambique->generateGridRenderer($this);
         $this->stylizer = Yii::app()->mozambique->getGridStylizer();
+        
+        $point = Yii::app()->mozambique->generatePoint(0, 0);
+        $this->setGridPosition($point);
     }
             
     public function getDesiredDimensions() {

@@ -1,0 +1,40 @@
+/*
+    Computes a set of tile properties
+ */
+ 
+div#main {
+    span.title {
+        font-size: $font-titles;
+    }
+    span {
+        font-size: $font-normal;
+    }
+}
+
+div.container {
+    width: $base-width;
+    font-size: $font-normal;
+}
+
+
+div.mainmenu {
+    font-size: $font-titles;
+}
+ 
+div.tiles div.tile{
+    margin-right: $tile-gap;
+    margin-bottom: $tile-gap;
+    min-height: $tile-height;
+}
+ 
+@for $i from 1 through 5 {
+    div.wide-#{$i} {
+        width: $tile-width * $i + $tile-gap * ($i - 1);
+        min-width: $tile-width * $i + $tile-gap * ($i - 1);
+    }
+    div.high-#{$i} {
+        height: $tile-height * $i + $tile-gap * ($i - 1);
+        min-height: $tile-height * $i + $tile-gap * ($i - 1);
+    } 
+}
+

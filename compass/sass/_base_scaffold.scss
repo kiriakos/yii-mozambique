@@ -1,1 +1,140 @@
+/*
+    Minor style deviations from Blueprint
 
+    Declare body as relative to avoid having the menu weigh in on the content 
+    centering.
+    Hiden HR's are generated for floating stylesheets in order to provide the
+    main container with a height.
+    Also adding some stylistic formating on the page's top margin and the 
+    debug stylesheet marker.
+ */
+
+body{
+    position:relative;
+}
+
+hr.hidden{
+    background-color: transparent;
+}
+
+div#page{
+    margin-top: 3%;
+}
+
+div.stylesheetMarker div{
+    text-align: right;
+    display: none;
+}
+
+/*
+    Ground rules and edge cases
+ */
+div#main .project.high-1 span.title{
+    max-width: 33%;
+}
+
+ 
+/*
+    Minimal mozambique scaffold for a 400px space.
+ */
+div.container
+{
+    width: 3 * $tile-width + 2 * $tile-gap + 10;
+    font-size: $font-normal;
+    overflow: hidden;
+}
+div#main span.title{
+    font-size: $font-titles;
+    width: 100%;
+}
+
+div.tiles{
+    div.merge,
+    div.tile{
+        float:left;
+        margin-right: $tile-gap;
+        margin-bottom: $tile-gap;
+        min-height: $tile-height;
+        display: inline-block;
+        overflow: hidden;
+        position:relative;
+    }
+    div.film_strip{
+        margin: 0;
+    }
+    div a.button:link,
+    div a.button:hover, 
+    div a.button:active,
+    div a.button:visited{
+        position:relative;
+        display:block;
+        text-decoration: none;
+        height: 100%;
+        width: 100%;
+    }
+    div img{
+        position:relative;
+        z-index: 1;
+    }
+    span.title{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        z-index: 2;
+        display: block;
+
+    }
+    span.descriptor{
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 2;
+        display: block;
+    }
+}
+
+div.wide-1{
+    width: $tile-width;
+    min-width: $tile-width;
+}
+div.wide-2{
+    width: $tile-width * 2 + $tile-gap;
+    min-width: $tile-width * 2 + $tile-gap;
+}
+div.wide-3,div.wide-4,div.wide-5{
+    width: $tile-width * 3 + $tile-gap * 2;
+    min-width: $tile-width * 3 + $tile-gap * 2;
+}
+
+div.high-1{
+    height: $tile-height;
+    min-height: $tile-height;
+}
+div.high-3,
+div.high-4,
+div.high-5,
+div.high-2{
+    height:$tile-height * 2 + $tile-gap;
+    min-height: $tile-height * 2 + $tile-gap;
+}
+/** on single column layouts heights bigger than 2 look weird so I sum them up
+    on high-2*/
+
+
+div.tiles > div.merge{
+    background-color: transparent; 
+    overflow:hidden;
+}
+div.merge > div.last{
+    margin-right: 0
+}
+
+div.tiles img.centered{
+    position: absolute;
+    top: 40%;
+    bottom: 40%;
+    left:40%;
+    right:40%;
+    width:20%;
+}

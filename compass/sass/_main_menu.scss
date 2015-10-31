@@ -1,0 +1,139 @@
+/* 
+    Main Menu Styles
+*/
+#mainmenu ul li,
+#mainmenu ul li a:visited,
+#mainmenu ul li a:active,
+#mainmenu ul li a:link
+{
+    display: inline-block;
+    color: $major-text-color;
+    min-height: 1.2em;
+    overflow: visible;
+    margin-left: $tile-gap;
+    text-decoration: none;
+    border: none;
+    border-bottom: .08em solid transparent;
+    width:auto;
+}
+
+#mainmenu ul{
+    margin: $tile-gap;
+    padding: 0;
+    display: inline-block;
+    position:relative
+}
+
+div#mainmenu {
+    position:relative;
+    width: 3 * $tile-width + 2 * $tile-gap + 10;
+    font-size: $font-titles;
+    margin: auto;
+    
+    &.tiles div{
+        overflow: visible;
+    }
+    
+    div.wide-2{
+        width: $tile-width * 2 + $tile-gap;
+        min-width: $tile-width * 2 + $tile-gap;
+    }
+}
+
+
+@media (min-width: 672px) {
+    $base-width: 672px;
+    $font-titles: 1.45em;
+    $font-normal: 1.3em;
+    
+    div#mainmenu{
+        position:relative;
+        width: $base-width;
+        margin: auto;
+        
+        div.wide-2{
+            width:536px;
+            min-width: 536px;
+        }
+        ul li a{
+            min-width: $tile-width;
+        }
+    }
+
+}
+
+@media ( min-width: 960px ) {
+    $base-width: 960px;
+    $font-titles: 1.66em;
+    $font-normal: 1.32em;
+
+    
+    div.mainmenu.container{
+        overflow:visible;
+        max-width: $base-width;
+    }
+        
+    div#mainmenu{
+        position:absolute;
+        width: $tile-width;
+        font-size: $font-titles;
+        left: -138px;
+        float:left;
+        z-index:1;
+        
+        ul,
+        div.wide-2{
+            width: $tile-width;
+            min-width: $tile-width;
+        }
+
+        ul, 
+        ul li{
+            margin:0;
+        }
+        
+        ul li{ 
+            padding:.1em; 
+            padding-bottom:0; 
+            text-align:right; 
+            overflow:visible; 
+            position:relative; 
+            display:block;
+                
+            a:visited,
+            a:active,
+            a:link {
+                margin:0; 
+                position:relative; 
+                right:.2em; 
+                overflow:hidden; 
+                height:auto; 
+                width:auto;
+            }
+        }
+    }
+
+}
+
+@media ( min-width: 1260px ) {
+    $base-width: 1260px;
+    $font-titles: 1.84em;
+    $font-normal: 1.5em;
+    $tile-width: 162px;
+    $tile-height: 162px;
+    $tile-gap: 15px;
+    
+    div#mainmenu{
+        position:absolute;
+        width: $tile-width + $tile-gap;
+        font-size: $font-titles;
+        left:-177px;
+        float:left;
+        z-index:1;
+    }
+    div#mainmenu ul, 
+    div#mainmenu div.wide-2{
+        width: $tile-width;
+        min-width: $tile-width;
+    }
+}

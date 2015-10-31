@@ -134,7 +134,11 @@ implements IMozambiqueTile{
     }
 
     public function getClasses() {
-        return array_keys($this->classes);
+        
+        $classes = array_keys($this->classes);
+        $classes[] = "column-" . $this->getGridPosition()->getX();
+        $classes[] = "row-" . $this->getGridPosition()->getY();
+        return $classes;
     }
 
     public function removeClass($class) {

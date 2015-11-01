@@ -115,7 +115,7 @@ div.high-3,
 div.high-4,
 div.high-5,
 div.high-2{
-    height:$tile-height * 2 + $tile-gap;
+    height: $tile-height * 2 + $tile-gap;
     min-height: $tile-height * 2 + $tile-gap;
 }
 /** on single column layouts heights bigger than 2 look weird so I sum them up

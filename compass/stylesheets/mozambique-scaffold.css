@@ -1,3 +1,13 @@
+/* line 2, ../sass/_1style.scss */
+div {
+  font-size: "2em";
+}
+
+/* line 2, ../sass/_1style.scss */
+div {
+  font-size: "3em";
+}
+
 /*
     color
  */
@@ -454,6 +464,96 @@ div#main div.tiles {
   /* No tile dimension import here, tiles stay the same size */
 }
 @media (min-width: 1260px) {
+  /*
+      Computes a set of tile properties
+   */
+  /* line 6, ../sass/_mozambique_tile_dimensions.scss */
+  div#main span.title {
+    font-size: 1.84em;
+  }
+  /* line 9, ../sass/_mozambique_tile_dimensions.scss */
+  div#main span {
+    font-size: 1.5em;
+  }
+
+  /* line 14, ../sass/_mozambique_tile_dimensions.scss */
+  div.container {
+    width: 1260px;
+    font-size: 1.5em;
+  }
+
+  /* line 20, ../sass/_mozambique_tile_dimensions.scss */
+  div.mainmenu {
+    font-size: 1.84em;
+  }
+
+  /* line 24, ../sass/_mozambique_tile_dimensions.scss */
+  div.tiles div.tile {
+    margin-right: 15px;
+    margin-bottom: 15px;
+    min-height: 162px;
+  }
+
+  /* line 31, ../sass/_mozambique_tile_dimensions.scss */
+  div.wide-1 {
+    width: 162px;
+    min-width: 162px;
+  }
+
+  /* line 35, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-1 {
+    height: 162px;
+    min-height: 162px;
+  }
+
+  /* line 31, ../sass/_mozambique_tile_dimensions.scss */
+  div.wide-2 {
+    width: 339px;
+    min-width: 339px;
+  }
+
+  /* line 35, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-2 {
+    height: 339px;
+    min-height: 339px;
+  }
+
+  /* line 31, ../sass/_mozambique_tile_dimensions.scss */
+  div.wide-3 {
+    width: 516px;
+    min-width: 516px;
+  }
+
+  /* line 35, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-3 {
+    height: 516px;
+    min-height: 516px;
+  }
+
+  /* line 31, ../sass/_mozambique_tile_dimensions.scss */
+  div.wide-4 {
+    width: 693px;
+    min-width: 693px;
+  }
+
+  /* line 35, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-4 {
+    height: 693px;
+    min-height: 693px;
+  }
+
+  /* line 31, ../sass/_mozambique_tile_dimensions.scss */
+  div.wide-5 {
+    width: 870px;
+    min-width: 870px;
+  }
+
+  /* line 35, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-5 {
+    height: 870px;
+    min-height: 870px;
+  }
+
   /* line 68, ../sass/_mozambique_absolute_scaffold.scss */
   div.container {
     width: 870px;

@@ -5,20 +5,37 @@
  div#main {
      div.tiles {
          position: relative;
+         
+         div.tile{
+             position: absolute;
+         }
      }
  }
  
 @media (max-width: 671px) {
-    div.wide-1.last{width:264px;min-width: 264px; margin-right: 0;}
-    div.wide-2.last{width:400px;min-width: 400px; margin-right: 0;}
-    div.merge.first{width: 100%;}
-    div.tiles > div.merge{ margin-right: 0;}
+    div#main div.tiles div.tile{
+        position: relative;
+    }
+    div.wide-1, div.wide-2, div.wide-3, div.wide-4, div.wide-5 {
+        width:400px;min-width: 400px; margin-right: 0;
+    }
+    
+    div#mainmenu div.wide-1{
+        width: $tile-width;
+        min-width: $tile-width;
+    }
+    div#mainmenu div.wide-2{
+        width: $tile-width * 2 + $tile-gap;
+        min-width: $tile-width * 2 + $tile-gap;
+    }
+    
+    @for $i from 1 through 30 {
+        div.high-#{$i} {
+            height: $tile-height * $i + $tile-gap * ($i - 1);
+            min-height: $tile-height * $i + $tile-gap * ($i - 1);
+        }   
+    }
 
-    /** on single column layouts heights bigger than 2 look weird */
-    div.merge.high-3{height:400px;min-height: 400px;}
-    div.merge.high-4{height:536px;min-height: 536px;}
-    div.merge.high-5{height:672px;min-height: 672px;}
-    /**/
 }
 
 @media (min-width: 672px) {
@@ -56,37 +73,25 @@
 }
 
 @media ( min-width: 1260px ) {
-    $base-width: 1260px;
-    $font-titles: 1.84em;
+    $font-titles: 1.75em;
     $font-normal: 1.5em;
     $tile-width: 162px;
     $tile-height: 162px;
     $tile-gap: 15px;
+    $base-width: $tile-width * 5 + $tile-gap * 4;
 
-    @import "mozambique_tile_dimensions";    
-    
-    div.container
-    {
-        width:870px;
-        overflow: hidden;
-    }
+    @import "mozambique_tile_dimensions";
+    @import "main_menu_grow";
+}
 
-    div.tiles > div.merge,
-    div.tiles div.tile{
-        margin-right: $tile-gap;
-        margin-bottom: $tile-gap;
-        min-height: $tile-height;
-    }
-    div.tiles div.last{margin-right: 0;}
-    div.wide-1{width:162px;min-width: 162px;}
-    div.wide-2{width:339px;min-width: 339px;}
-    div.wide-3{width:516px;min-width: 516px;}
-    div.wide-4{width:693px;min-width: 693px;}
-    div.wide-5{width:870px;min-width: 870px;}
-    div.high-1{height:162px;min-height: 162px;}
-    div.high-2{height:339px;min-height: 339px;}
-    div.high-3{height:516px;min-height: 516px;}
-    div.high-4{height:693px;min-height: 693px;}
-    div.high-5{height:870px;min-height: 870px;}
-    
+@media ( min-width: 1650px ) {
+    $font-titles: 1.75em;
+    $font-normal: 1.5em;
+    $tile-width: 212px;
+    $tile-height: 212px;
+    $tile-gap: 21px;
+    $base-width: $tile-width * 5 + $tile-gap * 4;
+
+    @import "mozambique_tile_dimensions";
+    @import "main_menu_grow";
 }

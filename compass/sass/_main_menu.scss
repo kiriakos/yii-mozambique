@@ -114,26 +114,3 @@ div#mainmenu {
     }
 
 }
-
-@media ( min-width: 1260px ) {
-    $base-width: 1260px;
-    $font-titles: 1.84em;
-    $font-normal: 1.5em;
-    $tile-width: 162px;
-    $tile-height: 162px;
-    $tile-gap: 15px;
-    
-    div#mainmenu{
-        position:absolute;
-        width: $tile-width + $tile-gap;
-        font-size: $font-titles;
-        left:-177px;
-        float:left;
-        z-index:1;
-    }
-    div#mainmenu ul, 
-    div#mainmenu div.wide-2{
-        width: $tile-width;
-        min-width: $tile-width;
-    }
-}

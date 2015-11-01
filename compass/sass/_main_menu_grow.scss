@@ -1,0 +1,23 @@
+/**
+ *  Partial to grow the main menu post the 1.2k point
+ * 
+ * Used by _mozambique_absolute_scaffold.scss
+ */
+div#page div.container div#mainmenu{
+    position:absolute;
+    width: $tile-width + $tile-gap;
+    font-size: $font-titles;
+    left: - $tile-width - $tile-gap;
+    float:left;
+    z-index:1;
+
+    ul, 
+    div.wide-2{
+        width: $tile-width;
+        min-width: $tile-width;
+    }
+}
+
+div#page div.mainmenu.container{
+    max-width: $base-width;
+}

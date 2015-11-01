@@ -82,11 +82,19 @@ extends CComponent{
         }
     }
     
+    /**
+     * Renders a .tiles DIV
+     * 
+     * gives the DIV a height class to allow for absolute positioning of content
+     * 
+     * @param type $return
+     * @return type
+     */
     private function renderOpenHTML($return){
         $main = $this->grid->isMainGrid();
         $divType= ($main)?'tiles':'merge';
         $wClass = (!$main)?'wide-'.$this->grid->getWidth():'';
-        $hClass = (!$main)?'high-'.$this->grid->getHeight():"";
+        $hClass = 'high-'.$this->grid->getHeight();
         $endClasses = join(' ', $this->grid->getClasses());
 
         $result = "<div class=\"$divType $wClass $hClass $endClasses \">";

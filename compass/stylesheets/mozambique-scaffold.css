@@ -110,24 +110,6 @@ div#mainmenu div.wide-2 {
     width: auto;
   }
 }
-@media (min-width: 1260px) {
-  /* line 126, ../sass/_main_menu.scss */
-  div#mainmenu {
-    position: absolute;
-    width: 177px;
-    font-size: 1.84em;
-    left: -177px;
-    float: left;
-    z-index: 1;
-  }
-
-  /* line 134, ../sass/_main_menu.scss */
-  div#mainmenu ul,
-  div#mainmenu div.wide-2 {
-    width: 162px;
-    min-width: 162px;
-  }
-}
 /*
     Minor style deviations from Blueprint
 
@@ -295,55 +277,218 @@ div.tiles img.centered {
 div#main div.tiles {
   position: relative;
 }
+/* line 9, ../sass/_mozambique_absolute_scaffold.scss */
+div#main div.tiles div.tile {
+  position: absolute;
+}
 
 @media (max-width: 671px) {
-  /* line 12, ../sass/_mozambique_absolute_scaffold.scss */
-  div.wide-1.last {
-    width: 264px;
-    min-width: 264px;
-    margin-right: 0;
+  /* line 16, ../sass/_mozambique_absolute_scaffold.scss */
+  div#main div.tiles div.tile {
+    position: relative;
   }
 
-  /* line 13, ../sass/_mozambique_absolute_scaffold.scss */
-  div.wide-2.last {
+  /* line 19, ../sass/_mozambique_absolute_scaffold.scss */
+  div.wide-1, div.wide-2, div.wide-3, div.wide-4, div.wide-5 {
     width: 400px;
     min-width: 400px;
     margin-right: 0;
   }
 
-  /* line 14, ../sass/_mozambique_absolute_scaffold.scss */
-  div.merge.first {
-    width: 100%;
+  /* line 23, ../sass/_mozambique_absolute_scaffold.scss */
+  div#mainmenu div.wide-1 {
+    width: 128px;
+    min-width: 128px;
   }
 
-  /* line 15, ../sass/_mozambique_absolute_scaffold.scss */
-  div.tiles > div.merge {
-    margin-right: 0;
+  /* line 27, ../sass/_mozambique_absolute_scaffold.scss */
+  div#mainmenu div.wide-2 {
+    width: 264px;
+    min-width: 264px;
   }
 
-  /** on single column layouts heights bigger than 2 look weird */
-  /* line 18, ../sass/_mozambique_absolute_scaffold.scss */
-  div.merge.high-3 {
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-1 {
+    height: 128px;
+    min-height: 128px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-2 {
+    height: 264px;
+    min-height: 264px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-3 {
     height: 400px;
     min-height: 400px;
   }
 
-  /* line 19, ../sass/_mozambique_absolute_scaffold.scss */
-  div.merge.high-4 {
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-4 {
     height: 536px;
     min-height: 536px;
   }
 
-  /* line 20, ../sass/_mozambique_absolute_scaffold.scss */
-  div.merge.high-5 {
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-5 {
     height: 672px;
     min-height: 672px;
   }
 
-  /**/
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-6 {
+    height: 808px;
+    min-height: 808px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-7 {
+    height: 944px;
+    min-height: 944px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-8 {
+    height: 1080px;
+    min-height: 1080px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-9 {
+    height: 1216px;
+    min-height: 1216px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-10 {
+    height: 1352px;
+    min-height: 1352px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-11 {
+    height: 1488px;
+    min-height: 1488px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-12 {
+    height: 1624px;
+    min-height: 1624px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-13 {
+    height: 1760px;
+    min-height: 1760px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-14 {
+    height: 1896px;
+    min-height: 1896px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-15 {
+    height: 2032px;
+    min-height: 2032px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-16 {
+    height: 2168px;
+    min-height: 2168px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-17 {
+    height: 2304px;
+    min-height: 2304px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-18 {
+    height: 2440px;
+    min-height: 2440px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-19 {
+    height: 2576px;
+    min-height: 2576px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-20 {
+    height: 2712px;
+    min-height: 2712px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-21 {
+    height: 2848px;
+    min-height: 2848px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-22 {
+    height: 2984px;
+    min-height: 2984px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-23 {
+    height: 3120px;
+    min-height: 3120px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-24 {
+    height: 3256px;
+    min-height: 3256px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-25 {
+    height: 3392px;
+    min-height: 3392px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-26 {
+    height: 3528px;
+    min-height: 3528px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-27 {
+    height: 3664px;
+    min-height: 3664px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-28 {
+    height: 3800px;
+    min-height: 3800px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-29 {
+    height: 3936px;
+    min-height: 3936px;
+  }
+
+  /* line 33, ../sass/_mozambique_absolute_scaffold.scss */
+  div.high-30 {
+    height: 4072px;
+    min-height: 4072px;
+  }
 }
 @media (min-width: 672px) {
-  /* line 29, ../sass/_mozambique_absolute_scaffold.scss */
+  /* line 46, ../sass/_mozambique_absolute_scaffold.scss */
   div.container {
     overflow: hidden;
   }
@@ -359,92 +504,447 @@ div#main div.tiles {
   div#main span {
     font-size: 1.3em;
   }
+  /* line 12, ../sass/_mozambique_tile_dimensions.scss */
+  div#main hr {
+    height: 0;
+    margin-bottom: 8px;
+  }
 
-  /* line 14, ../sass/_mozambique_tile_dimensions.scss */
+  /* line 18, ../sass/_mozambique_tile_dimensions.scss */
   div.container {
     width: 672px;
     font-size: 1.3em;
   }
 
-  /* line 20, ../sass/_mozambique_tile_dimensions.scss */
+  /* line 24, ../sass/_mozambique_tile_dimensions.scss */
   div.mainmenu {
     font-size: 1.45em;
   }
 
-  /* line 24, ../sass/_mozambique_tile_dimensions.scss */
+  /* line 28, ../sass/_mozambique_tile_dimensions.scss */
   div.tiles div.tile {
     margin-right: 8px;
     margin-bottom: 8px;
     min-height: 128px;
   }
 
-  /* line 31, ../sass/_mozambique_tile_dimensions.scss */
+  /* line 35, ../sass/_mozambique_tile_dimensions.scss */
   div.wide-1 {
     width: 128px;
     min-width: 128px;
   }
 
   /* line 35, ../sass/_mozambique_tile_dimensions.scss */
-  div.high-1 {
-    height: 128px;
-    min-height: 128px;
-  }
-
-  /* line 31, ../sass/_mozambique_tile_dimensions.scss */
   div.wide-2 {
     width: 264px;
     min-width: 264px;
   }
 
   /* line 35, ../sass/_mozambique_tile_dimensions.scss */
-  div.high-2 {
-    height: 264px;
-    min-height: 264px;
-  }
-
-  /* line 31, ../sass/_mozambique_tile_dimensions.scss */
   div.wide-3 {
     width: 400px;
     min-width: 400px;
   }
 
   /* line 35, ../sass/_mozambique_tile_dimensions.scss */
-  div.high-3 {
-    height: 400px;
-    min-height: 400px;
-  }
-
-  /* line 31, ../sass/_mozambique_tile_dimensions.scss */
   div.wide-4 {
     width: 536px;
     min-width: 536px;
   }
 
   /* line 35, ../sass/_mozambique_tile_dimensions.scss */
-  div.high-4 {
-    height: 536px;
-    min-height: 536px;
-  }
-
-  /* line 31, ../sass/_mozambique_tile_dimensions.scss */
   div.wide-5 {
     width: 672px;
     min-width: 672px;
   }
 
-  /* line 35, ../sass/_mozambique_tile_dimensions.scss */
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-1 {
+    height: 128px;
+    min-height: 128px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-2 {
+    height: 264px;
+    min-height: 264px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-3 {
+    height: 400px;
+    min-height: 400px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-4 {
+    height: 536px;
+    min-height: 536px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
   div.high-5 {
     height: 672px;
     min-height: 672px;
   }
 
-  /* line 37, ../sass/_mozambique_absolute_scaffold.scss */
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-6 {
+    height: 808px;
+    min-height: 808px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-7 {
+    height: 944px;
+    min-height: 944px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-8 {
+    height: 1080px;
+    min-height: 1080px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-9 {
+    height: 1216px;
+    min-height: 1216px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-10 {
+    height: 1352px;
+    min-height: 1352px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-11 {
+    height: 1488px;
+    min-height: 1488px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-12 {
+    height: 1624px;
+    min-height: 1624px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-13 {
+    height: 1760px;
+    min-height: 1760px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-14 {
+    height: 1896px;
+    min-height: 1896px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-15 {
+    height: 2032px;
+    min-height: 2032px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-16 {
+    height: 2168px;
+    min-height: 2168px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-17 {
+    height: 2304px;
+    min-height: 2304px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-18 {
+    height: 2440px;
+    min-height: 2440px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-19 {
+    height: 2576px;
+    min-height: 2576px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-20 {
+    height: 2712px;
+    min-height: 2712px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-21 {
+    height: 2848px;
+    min-height: 2848px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-22 {
+    height: 2984px;
+    min-height: 2984px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-23 {
+    height: 3120px;
+    min-height: 3120px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-24 {
+    height: 3256px;
+    min-height: 3256px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-25 {
+    height: 3392px;
+    min-height: 3392px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-26 {
+    height: 3528px;
+    min-height: 3528px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-27 {
+    height: 3664px;
+    min-height: 3664px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-28 {
+    height: 3800px;
+    min-height: 3800px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-29 {
+    height: 3936px;
+    min-height: 3936px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-30 {
+    height: 4072px;
+    min-height: 4072px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-0 {
+    left: 0px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-1 {
+    left: 136px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-2 {
+    left: 272px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-3 {
+    left: 408px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-4 {
+    left: 544px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-5 {
+    left: 680px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-6 {
+    left: 816px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-7 {
+    left: 952px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-8 {
+    left: 1088px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-9 {
+    left: 1224px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-0 {
+    top: 0px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-1 {
+    top: 136px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-2 {
+    top: 272px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-3 {
+    top: 408px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-4 {
+    top: 544px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-5 {
+    top: 680px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-6 {
+    top: 816px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-7 {
+    top: 952px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-8 {
+    top: 1088px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-9 {
+    top: 1224px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-10 {
+    top: 1360px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-11 {
+    top: 1496px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-12 {
+    top: 1632px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-13 {
+    top: 1768px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-14 {
+    top: 1904px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-15 {
+    top: 2040px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-16 {
+    top: 2176px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-17 {
+    top: 2312px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-18 {
+    top: 2448px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-19 {
+    top: 2584px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-20 {
+    top: 2720px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-21 {
+    top: 2856px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-22 {
+    top: 2992px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-23 {
+    top: 3128px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-24 {
+    top: 3264px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-25 {
+    top: 3400px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-26 {
+    top: 3536px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-27 {
+    top: 3672px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-28 {
+    top: 3808px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-29 {
+    top: 3944px;
+  }
+
+  /* line 54, ../sass/_mozambique_absolute_scaffold.scss */
   div.tiles div.last {
     margin-right: 0;
   }
 }
 @media (min-width: 960px) {
-  /* line 48, ../sass/_mozambique_absolute_scaffold.scss */
+  /* line 65, ../sass/_mozambique_absolute_scaffold.scss */
   div.container {
     width: 672px;
     overflow: hidden;
@@ -459,167 +959,941 @@ div#main div.tiles {
    */
   /* line 6, ../sass/_mozambique_tile_dimensions.scss */
   div#main span.title {
-    font-size: 1.84em;
+    font-size: 1.75em;
   }
   /* line 9, ../sass/_mozambique_tile_dimensions.scss */
   div#main span {
     font-size: 1.5em;
   }
+  /* line 12, ../sass/_mozambique_tile_dimensions.scss */
+  div#main hr {
+    height: 0;
+    margin-bottom: 15px;
+  }
 
-  /* line 14, ../sass/_mozambique_tile_dimensions.scss */
+  /* line 18, ../sass/_mozambique_tile_dimensions.scss */
   div.container {
-    width: 1260px;
+    width: 870px;
     font-size: 1.5em;
   }
 
-  /* line 20, ../sass/_mozambique_tile_dimensions.scss */
+  /* line 24, ../sass/_mozambique_tile_dimensions.scss */
   div.mainmenu {
-    font-size: 1.84em;
+    font-size: 1.75em;
+  }
+
+  /* line 28, ../sass/_mozambique_tile_dimensions.scss */
+  div.tiles div.tile {
+    margin-right: 15px;
+    margin-bottom: 15px;
+    min-height: 162px;
+  }
+
+  /* line 35, ../sass/_mozambique_tile_dimensions.scss */
+  div.wide-1 {
+    width: 162px;
+    min-width: 162px;
+  }
+
+  /* line 35, ../sass/_mozambique_tile_dimensions.scss */
+  div.wide-2 {
+    width: 339px;
+    min-width: 339px;
+  }
+
+  /* line 35, ../sass/_mozambique_tile_dimensions.scss */
+  div.wide-3 {
+    width: 516px;
+    min-width: 516px;
+  }
+
+  /* line 35, ../sass/_mozambique_tile_dimensions.scss */
+  div.wide-4 {
+    width: 693px;
+    min-width: 693px;
+  }
+
+  /* line 35, ../sass/_mozambique_tile_dimensions.scss */
+  div.wide-5 {
+    width: 870px;
+    min-width: 870px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-1 {
+    height: 162px;
+    min-height: 162px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-2 {
+    height: 339px;
+    min-height: 339px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-3 {
+    height: 516px;
+    min-height: 516px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-4 {
+    height: 693px;
+    min-height: 693px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-5 {
+    height: 870px;
+    min-height: 870px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-6 {
+    height: 1047px;
+    min-height: 1047px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-7 {
+    height: 1224px;
+    min-height: 1224px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-8 {
+    height: 1401px;
+    min-height: 1401px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-9 {
+    height: 1578px;
+    min-height: 1578px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-10 {
+    height: 1755px;
+    min-height: 1755px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-11 {
+    height: 1932px;
+    min-height: 1932px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-12 {
+    height: 2109px;
+    min-height: 2109px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-13 {
+    height: 2286px;
+    min-height: 2286px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-14 {
+    height: 2463px;
+    min-height: 2463px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-15 {
+    height: 2640px;
+    min-height: 2640px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-16 {
+    height: 2817px;
+    min-height: 2817px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-17 {
+    height: 2994px;
+    min-height: 2994px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-18 {
+    height: 3171px;
+    min-height: 3171px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-19 {
+    height: 3348px;
+    min-height: 3348px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-20 {
+    height: 3525px;
+    min-height: 3525px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-21 {
+    height: 3702px;
+    min-height: 3702px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-22 {
+    height: 3879px;
+    min-height: 3879px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-23 {
+    height: 4056px;
+    min-height: 4056px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-24 {
+    height: 4233px;
+    min-height: 4233px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-25 {
+    height: 4410px;
+    min-height: 4410px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-26 {
+    height: 4587px;
+    min-height: 4587px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-27 {
+    height: 4764px;
+    min-height: 4764px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-28 {
+    height: 4941px;
+    min-height: 4941px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-29 {
+    height: 5118px;
+    min-height: 5118px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-30 {
+    height: 5295px;
+    min-height: 5295px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-0 {
+    left: 0px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-1 {
+    left: 177px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-2 {
+    left: 354px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-3 {
+    left: 531px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-4 {
+    left: 708px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-5 {
+    left: 885px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-6 {
+    left: 1062px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-7 {
+    left: 1239px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-8 {
+    left: 1416px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-9 {
+    left: 1593px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-0 {
+    top: 0px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-1 {
+    top: 177px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-2 {
+    top: 354px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-3 {
+    top: 531px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-4 {
+    top: 708px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-5 {
+    top: 885px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-6 {
+    top: 1062px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-7 {
+    top: 1239px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-8 {
+    top: 1416px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-9 {
+    top: 1593px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-10 {
+    top: 1770px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-11 {
+    top: 1947px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-12 {
+    top: 2124px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-13 {
+    top: 2301px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-14 {
+    top: 2478px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-15 {
+    top: 2655px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-16 {
+    top: 2832px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-17 {
+    top: 3009px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-18 {
+    top: 3186px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-19 {
+    top: 3363px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-20 {
+    top: 3540px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-21 {
+    top: 3717px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-22 {
+    top: 3894px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-23 {
+    top: 4071px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-24 {
+    top: 4248px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-25 {
+    top: 4425px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-26 {
+    top: 4602px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-27 {
+    top: 4779px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-28 {
+    top: 4956px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-29 {
+    top: 5133px;
+  }
+
+  /**
+   *  Partial to grow the main menu post the 1.2k point
+   * 
+   * Used by _mozambique_absolute_scaffold.scss
+   */
+  /* line 6, ../sass/_main_menu_grow.scss */
+  div#page div.container div#mainmenu {
+    position: absolute;
+    width: 177px;
+    font-size: 1.75em;
+    left: -177px;
+    float: left;
+    z-index: 1;
+  }
+  /* line 14, ../sass/_main_menu_grow.scss */
+  div#page div.container div#mainmenu ul,
+  div#page div.container div#mainmenu div.wide-2 {
+    width: 162px;
+    min-width: 162px;
+  }
+
+  /* line 21, ../sass/_main_menu_grow.scss */
+  div#page div.mainmenu.container {
+    max-width: 870px;
+  }
+}
+@media (min-width: 1650px) {
+  /*
+      Computes a set of tile properties
+   */
+  /* line 6, ../sass/_mozambique_tile_dimensions.scss */
+  div#main span.title {
+    font-size: 1.75em;
+  }
+  /* line 9, ../sass/_mozambique_tile_dimensions.scss */
+  div#main span {
+    font-size: 1.5em;
+  }
+  /* line 12, ../sass/_mozambique_tile_dimensions.scss */
+  div#main hr {
+    height: 0;
+    margin-bottom: 21px;
+  }
+
+  /* line 18, ../sass/_mozambique_tile_dimensions.scss */
+  div.container {
+    width: 1144px;
+    font-size: 1.5em;
   }
 
   /* line 24, ../sass/_mozambique_tile_dimensions.scss */
+  div.mainmenu {
+    font-size: 1.75em;
+  }
+
+  /* line 28, ../sass/_mozambique_tile_dimensions.scss */
   div.tiles div.tile {
-    margin-right: 15px;
-    margin-bottom: 15px;
-    min-height: 162px;
+    margin-right: 21px;
+    margin-bottom: 21px;
+    min-height: 212px;
   }
 
-  /* line 31, ../sass/_mozambique_tile_dimensions.scss */
+  /* line 35, ../sass/_mozambique_tile_dimensions.scss */
   div.wide-1 {
-    width: 162px;
-    min-width: 162px;
+    width: 212px;
+    min-width: 212px;
   }
 
   /* line 35, ../sass/_mozambique_tile_dimensions.scss */
-  div.high-1 {
-    height: 162px;
-    min-height: 162px;
-  }
-
-  /* line 31, ../sass/_mozambique_tile_dimensions.scss */
   div.wide-2 {
-    width: 339px;
-    min-width: 339px;
+    width: 445px;
+    min-width: 445px;
   }
 
   /* line 35, ../sass/_mozambique_tile_dimensions.scss */
-  div.high-2 {
-    height: 339px;
-    min-height: 339px;
-  }
-
-  /* line 31, ../sass/_mozambique_tile_dimensions.scss */
   div.wide-3 {
-    width: 516px;
-    min-width: 516px;
+    width: 678px;
+    min-width: 678px;
   }
 
   /* line 35, ../sass/_mozambique_tile_dimensions.scss */
-  div.high-3 {
-    height: 516px;
-    min-height: 516px;
-  }
-
-  /* line 31, ../sass/_mozambique_tile_dimensions.scss */
   div.wide-4 {
-    width: 693px;
-    min-width: 693px;
+    width: 911px;
+    min-width: 911px;
   }
 
   /* line 35, ../sass/_mozambique_tile_dimensions.scss */
-  div.high-4 {
-    height: 693px;
-    min-height: 693px;
-  }
-
-  /* line 31, ../sass/_mozambique_tile_dimensions.scss */
   div.wide-5 {
-    width: 870px;
-    min-width: 870px;
+    width: 1144px;
+    min-width: 1144px;
   }
 
-  /* line 35, ../sass/_mozambique_tile_dimensions.scss */
-  div.high-5 {
-    height: 870px;
-    min-height: 870px;
-  }
-
-  /* line 68, ../sass/_mozambique_absolute_scaffold.scss */
-  div.container {
-    width: 870px;
-    overflow: hidden;
-  }
-
-  /* line 74, ../sass/_mozambique_absolute_scaffold.scss */
-  div.tiles > div.merge,
-  div.tiles div.tile {
-    margin-right: 15px;
-    margin-bottom: 15px;
-    min-height: 162px;
-  }
-
-  /* line 80, ../sass/_mozambique_absolute_scaffold.scss */
-  div.tiles div.last {
-    margin-right: 0;
-  }
-
-  /* line 81, ../sass/_mozambique_absolute_scaffold.scss */
-  div.wide-1 {
-    width: 162px;
-    min-width: 162px;
-  }
-
-  /* line 82, ../sass/_mozambique_absolute_scaffold.scss */
-  div.wide-2 {
-    width: 339px;
-    min-width: 339px;
-  }
-
-  /* line 83, ../sass/_mozambique_absolute_scaffold.scss */
-  div.wide-3 {
-    width: 516px;
-    min-width: 516px;
-  }
-
-  /* line 84, ../sass/_mozambique_absolute_scaffold.scss */
-  div.wide-4 {
-    width: 693px;
-    min-width: 693px;
-  }
-
-  /* line 85, ../sass/_mozambique_absolute_scaffold.scss */
-  div.wide-5 {
-    width: 870px;
-    min-width: 870px;
-  }
-
-  /* line 86, ../sass/_mozambique_absolute_scaffold.scss */
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
   div.high-1 {
-    height: 162px;
-    min-height: 162px;
+    height: 212px;
+    min-height: 212px;
   }
 
-  /* line 87, ../sass/_mozambique_absolute_scaffold.scss */
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
   div.high-2 {
-    height: 339px;
-    min-height: 339px;
+    height: 445px;
+    min-height: 445px;
   }
 
-  /* line 88, ../sass/_mozambique_absolute_scaffold.scss */
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
   div.high-3 {
-    height: 516px;
-    min-height: 516px;
+    height: 678px;
+    min-height: 678px;
   }
 
-  /* line 89, ../sass/_mozambique_absolute_scaffold.scss */
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
   div.high-4 {
-    height: 693px;
-    min-height: 693px;
+    height: 911px;
+    min-height: 911px;
   }
 
-  /* line 90, ../sass/_mozambique_absolute_scaffold.scss */
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
   div.high-5 {
-    height: 870px;
-    min-height: 870px;
+    height: 1144px;
+    min-height: 1144px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-6 {
+    height: 1377px;
+    min-height: 1377px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-7 {
+    height: 1610px;
+    min-height: 1610px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-8 {
+    height: 1843px;
+    min-height: 1843px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-9 {
+    height: 2076px;
+    min-height: 2076px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-10 {
+    height: 2309px;
+    min-height: 2309px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-11 {
+    height: 2542px;
+    min-height: 2542px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-12 {
+    height: 2775px;
+    min-height: 2775px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-13 {
+    height: 3008px;
+    min-height: 3008px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-14 {
+    height: 3241px;
+    min-height: 3241px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-15 {
+    height: 3474px;
+    min-height: 3474px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-16 {
+    height: 3707px;
+    min-height: 3707px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-17 {
+    height: 3940px;
+    min-height: 3940px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-18 {
+    height: 4173px;
+    min-height: 4173px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-19 {
+    height: 4406px;
+    min-height: 4406px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-20 {
+    height: 4639px;
+    min-height: 4639px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-21 {
+    height: 4872px;
+    min-height: 4872px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-22 {
+    height: 5105px;
+    min-height: 5105px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-23 {
+    height: 5338px;
+    min-height: 5338px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-24 {
+    height: 5571px;
+    min-height: 5571px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-25 {
+    height: 5804px;
+    min-height: 5804px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-26 {
+    height: 6037px;
+    min-height: 6037px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-27 {
+    height: 6270px;
+    min-height: 6270px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-28 {
+    height: 6503px;
+    min-height: 6503px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-29 {
+    height: 6736px;
+    min-height: 6736px;
+  }
+
+  /* line 42, ../sass/_mozambique_tile_dimensions.scss */
+  div.high-30 {
+    height: 6969px;
+    min-height: 6969px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-0 {
+    left: 0px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-1 {
+    left: 233px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-2 {
+    left: 466px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-3 {
+    left: 699px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-4 {
+    left: 932px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-5 {
+    left: 1165px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-6 {
+    left: 1398px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-7 {
+    left: 1631px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-8 {
+    left: 1864px;
+  }
+
+  /* line 49, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.column-9 {
+    left: 2097px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-0 {
+    top: 0px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-1 {
+    top: 233px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-2 {
+    top: 466px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-3 {
+    top: 699px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-4 {
+    top: 932px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-5 {
+    top: 1165px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-6 {
+    top: 1398px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-7 {
+    top: 1631px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-8 {
+    top: 1864px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-9 {
+    top: 2097px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-10 {
+    top: 2330px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-11 {
+    top: 2563px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-12 {
+    top: 2796px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-13 {
+    top: 3029px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-14 {
+    top: 3262px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-15 {
+    top: 3495px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-16 {
+    top: 3728px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-17 {
+    top: 3961px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-18 {
+    top: 4194px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-19 {
+    top: 4427px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-20 {
+    top: 4660px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-21 {
+    top: 4893px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-22 {
+    top: 5126px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-23 {
+    top: 5359px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-24 {
+    top: 5592px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-25 {
+    top: 5825px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-26 {
+    top: 6058px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-27 {
+    top: 6291px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-28 {
+    top: 6524px;
+  }
+
+  /* line 55, ../sass/_mozambique_tile_dimensions.scss */
+  div.tile.row-29 {
+    top: 6757px;
+  }
+
+  /**
+   *  Partial to grow the main menu post the 1.2k point
+   * 
+   * Used by _mozambique_absolute_scaffold.scss
+   */
+  /* line 6, ../sass/_main_menu_grow.scss */
+  div#page div.container div#mainmenu {
+    position: absolute;
+    width: 233px;
+    font-size: 1.75em;
+    left: -233px;
+    float: left;
+    z-index: 1;
+  }
+  /* line 14, ../sass/_main_menu_grow.scss */
+  div#page div.container div#mainmenu ul,
+  div#page div.container div#mainmenu div.wide-2 {
+    width: 212px;
+    min-width: 212px;
+  }
+
+  /* line 21, ../sass/_main_menu_grow.scss */
+  div#page div.mainmenu.container {
+    max-width: 1144px;
   }
 }

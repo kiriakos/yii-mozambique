@@ -9,6 +9,10 @@ div#main {
     span {
         font-size: $font-normal;
     }
+    hr{
+        height: 0;
+        margin-bottom: $tile-gap;
+    }
 }
 
 div.container {
@@ -26,15 +30,29 @@ div.tiles div.tile{
     margin-bottom: $tile-gap;
     min-height: $tile-height;
 }
- 
+
 @for $i from 1 through 5 {
     div.wide-#{$i} {
         width: $tile-width * $i + $tile-gap * ($i - 1);
         min-width: $tile-width * $i + $tile-gap * ($i - 1);
     }
+}
+
+@for $i from 1 through 30 {
     div.high-#{$i} {
         height: $tile-height * $i + $tile-gap * ($i - 1);
         min-height: $tile-height * $i + $tile-gap * ($i - 1);
     } 
 }
 
+@for $col from 0 to 10 {
+    div.tile.column-#{$col} {
+        left: ($tile-width  + $tile-gap) * $col;
+    }
+}
+
+@for $row from 0 to 30 {
+    div.tile.row-#{$row} {
+        top: ($tile-height + $tile-gap) * $row;
+    }
+}
